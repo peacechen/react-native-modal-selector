@@ -35,6 +35,7 @@ const propTypes = {
     cancelTextStyle: Text.propTypes.style,
     overlayStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
     cancelText: PropTypes.string,
+    disabled: PropTypes.bool,
     keyboardShouldPersistTaps: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
@@ -52,6 +53,7 @@ const defaultProps = {
     cancelTextStyle: {},
     overlayStyle: {},
     cancelText: 'cancel',
+    disabled: false,
     keyboardShouldPersistTaps: 'always'
 };
 
@@ -174,7 +176,7 @@ export default class ModalSelector extends BaseComponent {
         return (
             <View style={this.props.style}>
                 {dp}
-                <TouchableOpacity onPress={this.open}>
+                <TouchableOpacity onPress={this.open} disabled={this.props.disabled}>
                     {this.renderChildren()}
                 </TouchableOpacity>
             </View>

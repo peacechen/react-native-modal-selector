@@ -97,4 +97,5 @@ NOTE: Due to breaking changes in React Native, RN < 0.39.0 should pass `flex:1` 
 *   `optionTextStyle` (object, optional) style definitions for the option text element
 *   `cancelStyle` (object, optional) style definitions for the cancel element
 *   `cancelTextStyle` (object, optional) style definitions for the cancel text element
+*   `disabled` (bool, optional, default false) disable opening of the modal
 *   `keyboardShouldPersistTaps` (string/bool, optional, default 'always') passed to underlying ScrollView
