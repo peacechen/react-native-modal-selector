@@ -1,13 +1,27 @@
 {
   "name": "SampleApp",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
-    "start": "react-native run-ios"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "flow": "flow --show-all-errors",
+    "test": "jest",
+    "nodemon": "nodemon nodemon.json"
   },
   "dependencies": {
-    "react": "^15.1.0",
-    "react-native": "^0.27.2",
-    "react-native-modal-picker": "file:../"
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.47.1",
+    "react-native-modal-selector": "file:../"
+  },
+  "devDependencies": {
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "2.1.0",
+    "flow-bin": "^0.52.0",
+    "jest": "20.0.4",
+    "nodemon": "^1.11.0",
+    "react-test-renderer": "16.0.0-alpha.12"
+  },
+  "jest": {
+    "preset": "react-native"
   }
 }

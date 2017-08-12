@@ -2,8 +2,19 @@
 
 This demo app demonstrates how to use this component.
 
+```
+$ npm install
+$ react-native run-[ios|android]
+```
+
 # Development
 
-Because the packager [does not support symlinks at the moment](https://github.com/facebook/react-native/issues/637), we have to use a custom nodemon workaround to use this app for development. After starting React Native use the following command to keep the module in sync.
+Use [nodemon](https://github.com/remy/nodemon) to keep the module in sync with `node_modules` of this example app:
 
-`nodemon nodemon.json`
+```
+$ npm install
+$ react-native run-[ios|android]
+$ npm run nodemon
+```
+
+You can now edit the files in `../`, and they will be synced to `node_modules/react-native-modal-selector/`
