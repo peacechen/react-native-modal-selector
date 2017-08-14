@@ -10,7 +10,7 @@ const HIGHLIGHT_COLOR = 'rgba(0,118,255,0.9)';
 export default StyleSheet.create({
 
     overlayStyle: {
-        style: 1,
+        flex: 1,
         padding: 30,
         justifyContent: 'center',
         backgroundColor: 'rgba(0,0,0,0.7)'
