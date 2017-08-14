@@ -1,8 +1,6 @@
 'use strict';
 
-import { StyleSheet, Dimensions } from 'react-native';
-
-const {height, width} = Dimensions.get('window');
+import { StyleSheet } from 'react-native';
 
 const PADDING = 8;
 const BORDER_RADIUS = 5;
@@ -12,23 +10,24 @@ const HIGHLIGHT_COLOR = 'rgba(0,118,255,0.9)';
 export default StyleSheet.create({
 
     overlayStyle: {
-        width: width,
-        height: height,
-        padding:width*0.1,
+        style: 1,
+        padding: 30,
         justifyContent: 'center',
         backgroundColor: 'rgba(0,0,0,0.7)'
     },
 
     optionContainer: {
-        borderRadius:BORDER_RADIUS,
-        flexShrink: 1,
+        borderRadius: BORDER_RADIUS,
+        flex: 1,
         marginBottom: 8,
         padding: PADDING,
         backgroundColor:'rgba(255,255,255,0.8)',
     },
 
     cancelContainer: {
-      alignSelf: 'center'
+        flex: 1,
+        maxHeight: 30,
+        alignSelf: 'stretch'
     },
 
     selectStyle: {
@@ -46,7 +45,6 @@ export default StyleSheet.create({
 
     cancelStyle: {
         borderRadius: BORDER_RADIUS,
-        width: width * 0.8,
         backgroundColor: 'rgba(255,255,255,0.8)',
         padding: PADDING
     },

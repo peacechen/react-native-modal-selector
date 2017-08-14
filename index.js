@@ -166,8 +166,15 @@ export default class ModalSelector extends BaseComponent {
     render() {
 
         const dp = (
-          <Modal transparent={true} ref="modal" visible={this.state.modalVisible} onRequestClose={this.close} animationType={this.state.animationType}>
-          {this.renderOptionList()}
+          <Modal
+              transparent={true}
+              ref="modal"
+              supportedOrientations={['landscape', 'portrait']}
+              visible={this.state.modalVisible}
+              onRequestClose={this.close}
+              animationType={this.state.animationType}
+          >
+              {this.renderOptionList()}
           </Modal>
         );
 
