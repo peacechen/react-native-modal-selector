@@ -2,6 +2,8 @@
 
 A cross-platform (iOS / Android), selector/picker component for React Native that is highly customizable and supports sections.
 
+This project is the official continuation of the abandoned `react-native-modal-picker` repo. Contributors are welcome to [request a promotion to collaborator status](https://github.com/peacechen/react-native-modal-selector/issues/1).
+
 ## Demo
 
 <img src="https://raw.githubusercontent.com/d-a-n/react-native-modal-picker/master/docs/demo.gif" />

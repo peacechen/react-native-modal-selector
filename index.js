@@ -177,7 +177,9 @@ export default class ModalSelector extends BaseComponent {
             <View style={this.props.style}>
                 {dp}
                 <TouchableOpacity onPress={this.open} disabled={this.props.disabled}>
-                    {this.renderChildren()}
+                    <View pointerEvents="none">
+                        {this.renderChildren()}
+                    </View>
                 </TouchableOpacity>
             </View>
         );
