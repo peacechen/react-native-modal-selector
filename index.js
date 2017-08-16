@@ -36,7 +36,7 @@ const propTypes = {
     overlayStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
     cancelText: PropTypes.string,
     disabled: PropTypes.bool,
-    supportedOrientations: PropTypes.arrayOf(PropTypes.oneOfType(['portrait', 'landscape'])),
+    supportedOrientations: PropTypes.arrayOf(PropTypes.oneOfType(['portrait', 'landscape', 'portrait-upside-down', 'landscape-left', 'landscape-right'])),
     keyboardShouldPersistTaps: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
