@@ -67,6 +67,7 @@ class SampleApp extends Component {
                 <ModalSelector
                     data={data}
                     initValue="Select something yummy!"
+                    supportedOrientations={['landscape']}
                     onChange={(option)=>{ this.setState({textInputValue:option.label})}}>
 
                     <TextInput
@@ -100,4 +101,5 @@ NOTE: Due to breaking changes in React Native, RN < 0.39.0 should pass `flex:1` 
 *   `cancelStyle` (object, optional) style definitions for the cancel element
 *   `cancelTextStyle` (object, optional) style definitions for the cancel text element
 *   `disabled` (bool, optional, default false) disable opening of the modal
+*   `supportedOrientations` (`['portrait', 'landscape']`, optional, default both), orientations the modal support
 *   `keyboardShouldPersistTaps` (string/bool, optional, default 'always') passed to underlying ScrollView

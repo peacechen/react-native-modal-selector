@@ -36,6 +36,7 @@ const propTypes = {
     overlayStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
     cancelText: PropTypes.string,
     disabled: PropTypes.bool,
+    supportedOrientations: PropTypes.arrayOf(PropTypes.oneOfType(['portrait', 'landscape'])),
     keyboardShouldPersistTaps: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 };
 
@@ -54,6 +55,7 @@ const defaultProps = {
     overlayStyle: {},
     cancelText: 'cancel',
     disabled: false,
+    supportedOrientations: ['portrait', 'landscape'],
     keyboardShouldPersistTaps: 'always'
 };
 
@@ -171,7 +173,7 @@ export default class ModalSelector extends BaseComponent {
           <Modal
               transparent={true}
               ref="modal"
-              supportedOrientations={['landscape', 'portrait']}
+              supportedOrientations={this.props.supportedOrientations}
               visible={this.state.modalVisible}
               onRequestClose={this.close}
               animationType={this.state.animationType}
