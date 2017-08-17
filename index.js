@@ -5,13 +5,10 @@ import PropTypes from 'prop-types';
 
 import {
     View,
-    StyleSheet,
-    Dimensions,
     Modal,
     Text,
     ScrollView,
     TouchableOpacity,
-    Platform,
     ViewPropTypes
 } from 'react-native';
 
@@ -42,7 +39,7 @@ const propTypes = {
 
 const defaultProps = {
     data: [],
-    onChange: ()=> {},
+    onChange: () => {},
     initValue: 'Select me!',
     style: {},
     selectStyle: {},
@@ -86,9 +83,9 @@ export default class ModalSelector extends BaseComponent {
     }
 
     componentWillReceiveProps(nextProps) {
-      if (nextProps.initValue != this.props.initValue) {
-        this.setState({selected: nextProps.initValue});
-      }
+        if (nextProps.initValue !== this.props.initValue) {
+            this.setState({selected: nextProps.initValue});
+        }
     }
 
     onChange(item) {
@@ -98,15 +95,15 @@ export default class ModalSelector extends BaseComponent {
     }
 
     close() {
-      this.setState({
-        modalVisible: false
-      });
+        this.setState({
+            modalVisible: false
+        });
     }
 
     open() {
-      this.setState({
-        modalVisible: true
-      });
+        this.setState({
+            modalVisible: true
+        });
     }
 
     renderSection(section) {
@@ -119,20 +116,20 @@ export default class ModalSelector extends BaseComponent {
 
     renderOption(option) {
         return (
-            <TouchableOpacity key={option.key} onPress={()=>this.onChange(option)}>
+            <TouchableOpacity key={option.key} onPress={() => this.onChange(option)}>
                 <View style={[styles.optionStyle, this.props.optionStyle]}>
                     <Text style={[styles.optionTextStyle,this.props.optionTextStyle]}>{option.label}</Text>
                 </View>
-            </TouchableOpacity>)
+            </TouchableOpacity>);
     }
 
     renderOptionList() {
-        var options = this.props.data.map((item) => {
+        let options = this.props.data.map(item => {
             if (item.section) {
                 return this.renderSection(item);
-            } else {
-                return this.renderOption(item);
             }
+            return this.renderOption(item);
+
         });
 
         return (
@@ -170,16 +167,16 @@ export default class ModalSelector extends BaseComponent {
     render() {
 
         const dp = (
-          <Modal
-              transparent={true}
-              ref="modal"
-              supportedOrientations={this.props.supportedOrientations}
-              visible={this.state.modalVisible}
-              onRequestClose={this.close}
-              animationType={this.state.animationType}
-          >
-              {this.renderOptionList()}
-          </Modal>
+            <Modal
+                transparent={true}
+                ref={element => this.model = element}
+                supportedOrientations={this.props.supportedOrientations}
+                visible={this.state.modalVisible}
+                onRequestClose={this.close}
+                animationType={this.state.animationType}
+            >
+                {this.renderOptionList()}
+            </Modal>
         );
 
         return (
