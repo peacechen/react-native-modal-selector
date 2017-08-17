@@ -9,7 +9,7 @@ import {
     Text,
     ScrollView,
     TouchableOpacity,
-    ViewPropTypes
+    ViewPropTypes,
 } from 'react-native';
 
 import styles from './style';
@@ -19,41 +19,41 @@ let componentIndex = 0;
 let rnVersion = Number.parseFloat(require('react-native/package.json').version);
 
 const propTypes = {
-    data: PropTypes.array,
-    onChange: PropTypes.func,
-    initValue: PropTypes.string,
-    style: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
-    selectStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
-    optionStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
-    optionTextStyle: Text.propTypes.style,
-    sectionStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
-    sectionTextStyle: Text.propTypes.style,
-    cancelStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
-    cancelTextStyle: Text.propTypes.style,
-    overlayStyle: rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
-    cancelText: PropTypes.string,
-    disabled: PropTypes.bool,
-    supportedOrientations: PropTypes.arrayOf(PropTypes.oneOfType(['portrait', 'landscape', 'portrait-upside-down', 'landscape-left', 'landscape-right'])),
-    keyboardShouldPersistTaps: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+    data:                      PropTypes.array,
+    onChange:                  PropTypes.func,
+    initValue:                 PropTypes.string,
+    style:                     rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
+    selectStyle:               rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
+    optionStyle:               rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
+    optionTextStyle:           Text.propTypes.style,
+    sectionStyle:              rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
+    sectionTextStyle:          Text.propTypes.style,
+    cancelStyle:               rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
+    cancelTextStyle:           Text.propTypes.style,
+    overlayStyle:              rnVersion >= 0.44 ? ViewPropTypes.style : View.propTypes.style,
+    cancelText:                PropTypes.string,
+    disabled:                  PropTypes.bool,
+    supportedOrientations:     PropTypes.arrayOf(PropTypes.oneOfType(['portrait', 'landscape', 'portrait-upside-down', 'landscape-left', 'landscape-right'])),
+    keyboardShouldPersistTaps: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 };
 
 const defaultProps = {
-    data: [],
-    onChange: () => {},
-    initValue: 'Select me!',
-    style: {},
-    selectStyle: {},
-    optionStyle: {},
-    optionTextStyle: {},
-    sectionStyle: {},
-    sectionTextStyle: {},
-    cancelStyle: {},
-    cancelTextStyle: {},
-    overlayStyle: {},
-    cancelText: 'cancel',
-    disabled: false,
-    supportedOrientations: ['portrait', 'landscape'],
-    keyboardShouldPersistTaps: 'always'
+    data:                      [],
+    onChange:                  () => {},
+    initValue:                 'Select me!',
+    style:                     {},
+    selectStyle:               {},
+    optionStyle:               {},
+    optionTextStyle:           {},
+    sectionStyle:              {},
+    sectionTextStyle:          {},
+    cancelStyle:               {},
+    cancelTextStyle:           {},
+    overlayStyle:              {},
+    cancelText:                'cancel',
+    disabled:                  false,
+    supportedOrientations:     ['portrait', 'landscape'],
+    keyboardShouldPersistTaps: 'always',
 };
 
 export default class ModalSelector extends BaseComponent {
@@ -71,9 +71,9 @@ export default class ModalSelector extends BaseComponent {
 
         this.state = {
             animationType: 'slide',
-            modalVisible: false,
-            transparent: false,
-            selected: 'please select'
+            modalVisible:  false,
+            transparent:   false,
+            selected:      'please select',
         };
     }
 
@@ -96,13 +96,13 @@ export default class ModalSelector extends BaseComponent {
 
     close() {
         this.setState({
-            modalVisible: false
+            modalVisible: false,
         });
     }
 
     open() {
         this.setState({
-            modalVisible: true
+            modalVisible: true,
         });
     }
 
@@ -136,7 +136,7 @@ export default class ModalSelector extends BaseComponent {
             <View style={[styles.overlayStyle, this.props.overlayStyle]} key={'modalSelector'+(componentIndex++)}>
                 <View style={styles.optionContainer}>
                     <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}>
-                        <View style={{paddingHorizontal:10}}>
+                        <View style={{paddingHorizontal: 10}}>
                             {options}
                         </View>
                     </ScrollView>

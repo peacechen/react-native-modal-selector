@@ -58,7 +58,6 @@
     require-await: 2,
     no-irregular-whitespace: 2,
     arrow-spacing: "error",
-
     arrow-parens: ["error", "as-needed"],
     brace-style: [
       "error",
@@ -70,5 +69,18 @@
         exceptions: {ImportDeclaration: true}
       }
     ],
+    key-spacing: [2, {
+      beforeColon: false,
+      afterColon: true,
+      align: "value"
+    }],
+    no-empty-function: 2,
+    comma-dangle: ["error", {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "never",
+        "functions": "ignore",
+    }],
   }
 }
