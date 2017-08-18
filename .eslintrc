@@ -35,7 +35,7 @@
     no-use-before-define: 0,
     no-underscore-dangle: 0,
     import/no-extraneous-dependencies: 0,
-    import/no-unresolved: 2,
+    import/no-unresolved: [2, { ignore: ['react', 'react-native'] }],
     no-spaced-func: 2,
     space-in-parens: ["error", "never"],
     no-var: "error",
