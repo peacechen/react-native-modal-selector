@@ -98,6 +98,7 @@ NOTE: Due to breaking changes in React Native, RN < 0.39.0 should pass `flex:1` 
 *   `sectionTextStyle` (object, optional) style definitions for the select text element
 *   `optionStyle` (object, optional) style definitions for the option element
 *   `optionTextStyle` (object, optional) style definitions for the option text element
+*   `optionContainerStyle` (object, optional) style definitions for the option container element
 *   `cancelStyle` (object, optional) style definitions for the cancel element
 *   `cancelTextStyle` (object, optional) style definitions for the cancel text element
 *   `disabled` (bool, optional, default false) disable opening of the modal
