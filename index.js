@@ -23,6 +23,7 @@ const propTypes = {
     data:                      PropTypes.array,
     onChange:                  PropTypes.func,
     initValue:                 PropTypes.string,
+    animationType:             Modal.propTypes.animationType,
     style:                     ViewPropTypes.style,
     selectStyle:               ViewPropTypes.style,
     optionStyle:               ViewPropTypes.style,
@@ -43,6 +44,7 @@ const defaultProps = {
     data:                      [],
     onChange:                  () => {},
     initValue:                 'Select me!',
+    animationType:             'slide',
     style:                     {},
     selectStyle:               {},
     optionStyle:               {},
@@ -73,7 +75,6 @@ export default class ModalSelector extends BaseComponent {
         );
 
         this.state = {
-            animationType: 'slide',
             modalVisible:  false,
             transparent:   false,
             selected:      'please select',
@@ -176,7 +177,7 @@ export default class ModalSelector extends BaseComponent {
                 supportedOrientations={this.props.supportedOrientations}
                 visible={this.state.modalVisible}
                 onRequestClose={this.close}
-                animationType={this.state.animationType}
+                animationType={this.props.animationType}
             >
                 {this.renderOptionList()}
             </Modal>
