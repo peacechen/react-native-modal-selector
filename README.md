@@ -89,6 +89,7 @@ class SampleApp extends Component {
 *   `style` (object, optional) style definitions for the root element
 *   `onChange` (function, optional) callback function, when the users has selected an option
 *   `initValue` (string, optional) text that is initially shown on the button
+*   `animationType` (string, optional) type of animation to be used to show the modal. Must be one of `none`, `slide` or `fade`. Defaults to `slide`
 *   `cancelText` (string, optional) text of the cancel button
 *   `selectStyle` (object, optional) style definitions for the select element (available in default mode only!).
 NOTE: Due to breaking changes in React Native, RN < 0.39.0 should pass `flex:1` explicitly to `selectStyle` as a prop.
