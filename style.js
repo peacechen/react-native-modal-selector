@@ -25,7 +25,7 @@ export default StyleSheet.create({
     },
 
     cancelContainer: {
-        flex:      1,
+        flexGrow:  1,
         maxHeight: 30,
         alignSelf: 'stretch',
     },
