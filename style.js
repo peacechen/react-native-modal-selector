@@ -11,7 +11,7 @@ export default StyleSheet.create({
 
     overlayStyle: {
         flex:            1,
-        padding:         '10%',
+        padding:         '5%',
         justifyContent:  'center',
         backgroundColor: 'rgba(0,0,0,0.7)',
     },
