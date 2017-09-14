@@ -23,10 +23,13 @@ const propTypes = {
     data:                      PropTypes.array,
     onChange:                  PropTypes.func,
     initValue:                 PropTypes.string,
+    animationType:             Modal.propTypes.animationType,
     style:                     ViewPropTypes.style,
     selectStyle:               ViewPropTypes.style,
+    selectTextStyle:           ViewPropTypes.style,
     optionStyle:               ViewPropTypes.style,
     optionTextStyle:           Text.propTypes.style,
+    optionContainerStyle:      ViewPropTypes.style,
     sectionStyle:              ViewPropTypes.style,
     sectionTextStyle:          Text.propTypes.style,
     cancelStyle:               ViewPropTypes.style,
@@ -42,10 +45,13 @@ const defaultProps = {
     data:                      [],
     onChange:                  () => {},
     initValue:                 'Select me!',
+    animationType:             'slide',
     style:                     {},
     selectStyle:               {},
+    selectTextStyle:           {},
     optionStyle:               {},
     optionTextStyle:           {},
+    optionContainerStyle:      {},
     sectionStyle:              {},
     sectionTextStyle:          {},
     cancelStyle:               {},
@@ -71,7 +77,6 @@ export default class ModalSelector extends BaseComponent {
         );
 
         this.state = {
-            animationType: 'slide',
             modalVisible:  false,
             transparent:   false,
             selected:      'please select',
@@ -135,7 +140,7 @@ export default class ModalSelector extends BaseComponent {
 
         return (
             <View style={[styles.overlayStyle, this.props.overlayStyle]} key={'modalSelector'+(componentIndex++)}>
-                <View style={styles.optionContainer}>
+                <View style={[styles.optionContainer, this.props.optionContainerStyle]}>
                     <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}>
                         <View style={{paddingHorizontal: 10}}>
                             {options}
@@ -174,7 +179,7 @@ export default class ModalSelector extends BaseComponent {
                 supportedOrientations={this.props.supportedOrientations}
                 visible={this.state.modalVisible}
                 onRequestClose={this.close}
-                animationType={this.state.animationType}
+                animationType={this.props.animationType}
             >
                 {this.renderOptionList()}
             </Modal>

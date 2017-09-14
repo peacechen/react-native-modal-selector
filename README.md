@@ -6,7 +6,7 @@ This project is the official continuation of the abandoned `react-native-modal-p
 
 ## Demo
 
-<img src="https://raw.githubusercontent.com/d-a-n/react-native-modal-picker/master/docs/demo.gif" />
+<img src="https://github.com/peacechen/react-native-modal-selector/blob/master/docs/demo.gif" />
 
 ## Install
 
@@ -24,12 +24,10 @@ See `SampleApp` for an example how to use this component.
 
 import ModalSelector from 'react-native-modal-selector'
 
-[..]
-
 class SampleApp extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             textInputValue: ''
@@ -43,27 +41,21 @@ class SampleApp extends Component {
             { key: index++, label: 'Red Apples' },
             { key: index++, label: 'Cherries' },
             { key: index++, label: 'Cranberries' },
-            { key: index++, label: 'Pink Grapefruit' },
-            { key: index++, label: 'Raspberries' },
-            { key: index++, section: true, label: 'Vegetables' },
-            { key: index++, label: 'Beets' },
-            { key: index++, label: 'Red Peppers' },
-            { key: index++, label: 'Radishes' },
-            { key: index++, label: 'Radicchio' },
-            { key: index++, label: 'Red Onions' },
-            { key: index++, label: 'Red Potatoes' },
-            { key: index++, label: 'Rhubarb' },
-            { key: index++, label: 'Tomatoes' }
+            // etc...
+            // Can also add additional custom keys which are passed to the onChange callback
+            { key: index++, label: 'Vegetable', customKey: 'Not a fruit' }
         ];
 
         return (
             <View style={{flex:1, justifyContent:'space-around', padding:50}}>
 
+                // Default mode
                 <ModalSelector
                     data={data}
                     initValue="Select something yummy!"
                     onChange={(option)=>{ alert(`${option.label} (${option.key}) nom nom nom`) }} />
 
+                // Wrapper
                 <ModalSelector
                     data={data}
                     initValue="Select something yummy!"
@@ -83,23 +75,26 @@ class SampleApp extends Component {
 }
 ```
 
-## Props
-
-*   `data` (array, required) array of objects with a unique key and label
-*   `style` (object, optional) style definitions for the root element
-*   `onChange` (function, optional) callback function, when the users has selected an option
-*   `initValue` (string, optional) text that is initially shown on the button
-*   `cancelText` (string, optional) text of the cancel button
-*   `selectStyle` (object, optional) style definitions for the select element (available in default mode only!).
-NOTE: Due to breaking changes in React Native, RN < 0.39.0 should pass `flex:1` explicitly to `selectStyle` as a prop.
-*   `selectTextStyle` (object, optional) style definitions for the select element (available in default mode only!)
-*   `overlayStyle` (object, optional) style definitions for the overly/background element
-*   `sectionStyle` (object, optional) style definitions for the section element
-*   `sectionTextStyle` (object, optional) style definitions for the select text element
-*   `optionStyle` (object, optional) style definitions for the option element
-*   `optionTextStyle` (object, optional) style definitions for the option text element
-*   `cancelStyle` (object, optional) style definitions for the cancel element
-*   `cancelTextStyle` (object, optional) style definitions for the cancel text element
-*   `disabled` (bool, optional, default false) disable opening of the modal
-*   `supportedOrientations` (`['portrait', 'landscape']`, optional, default both), orientations the modal support
-*   `keyboardShouldPersistTaps` (string/bool, optional, default 'always') passed to underlying ScrollView
+## API
+### Props
+Prop                | Type     | Optional | Default      | Description
+------------------- | -------- | -------- | ------------ | -----------
+`data`              | array    | No       | []           | array of objects with a unique key and label to select in the modal.
+`onChange`          | function | Yes      | () => {}     | callback function, when the users has selected an option
+`initValue`         | string   | Yes      | `Select me!` | text that is initially shown on the button
+`cancelText`        | string   | Yes      | `cancel`     | text of the cancel button
+`animationType`     | string   | Yes      | `slide`      | type of animation to be used to show the modal. Must be one of `none`, `slide` or `fade`.
+`disabled`          | bool     | Yes      | false        | `true` disables opening of the modal
+`supportedOrientations`    | ['portrait', 'landscape'] | Yes      | both      | orientations the modal supports
+`keyboardShouldPersistTaps`| `string` / `bool`         | Yes      | `always`  | passed to underlying ScrollView
+`style`             | object   | Yes      |              | style definitions for the root element
+`selectStyle`       | object   | Yes      | {}           | style definitions for the select element (available in default mode only!). NOTE: Due to breaking changes in React Native, RN < 0.39.0 should pass `flex:1` explicitly to `selectStyle` as a prop.
+`selectTextStyle`   | object   | Yes      | {}           | style definitions for the select element (available in default mode only!)
+`overlayStyle`      | object   | Yes      | {}           | style definitions for the overly/background element
+`sectionStyle`      | object   | Yes      | {}           | style definitions for the section element
+`sectionTextStyle`  | object   | Yes      | {}           | style definitions for the select text element
+`optionStyle`       | object   | Yes      | {}           | style definitions for the option element
+`optionTextStyle`   | object   | Yes      | {}           | style definitions for the option text element
+`optionContainerStyle`| object | Yes      | {}           | style definitions for the option container element
+`cancelStyle`       | object   | Yes      | {}           | style definitions for the cancel element
+`cancelTextStyle`   | object   | Yes      | {}           | style definitions for the cancel text element
