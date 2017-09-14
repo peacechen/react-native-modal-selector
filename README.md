@@ -90,7 +90,7 @@ Prop                | Type     | Optional | Default      | Description
 `style`             | object   | Yes      |              | style definitions for the root element
 `selectStyle`       | object   | Yes      | {}           | style definitions for the select element (available in default mode only!). NOTE: Due to breaking changes in React Native, RN < 0.39.0 should pass `flex:1` explicitly to `selectStyle` as a prop.
 `selectTextStyle`   | object   | Yes      | {}           | style definitions for the select element (available in default mode only!)
-`overlayStyle`      | object   | Yes      | {}           | style definitions for the overly/background element
+`overlayStyle`      | object   | Yes      | { flex: 1, padding: '5%', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.7)' } | style definitions for the overlay background element. RN <= 0.41 should override this with pixel value for padding.
 `sectionStyle`      | object   | Yes      | {}           | style definitions for the section element
 `sectionTextStyle`  | object   | Yes      | {}           | style definitions for the select text element
 `optionStyle`       | object   | Yes      | {}           | style definitions for the option element
