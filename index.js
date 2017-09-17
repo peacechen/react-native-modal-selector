@@ -26,7 +26,7 @@ const propTypes = {
     animationType:             Modal.propTypes.animationType,
     style:                     ViewPropTypes.style,
     selectStyle:               ViewPropTypes.style,
-    selectTextStyle:           ViewPropTypes.style,
+    selectTextStyle:           Text.propTypes.style,
     optionStyle:               ViewPropTypes.style,
     optionTextStyle:           Text.propTypes.style,
     optionContainerStyle:      ViewPropTypes.style,
