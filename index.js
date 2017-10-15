@@ -9,6 +9,7 @@ import {
     Text,
     ScrollView,
     TouchableOpacity,
+    TouchableWithoutFeedback,
     ViewPropTypes as RNViewPropTypes,
 } from 'react-native';
 
@@ -39,6 +40,7 @@ const propTypes = {
     disabled:                  PropTypes.bool,
     supportedOrientations:     PropTypes.arrayOf(PropTypes.oneOf(['portrait', 'landscape', 'portrait-upside-down', 'landscape-left', 'landscape-right'])),
     keyboardShouldPersistTaps: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    pressClosesOverlay:        PropTypes.bool,
 };
 
 const defaultProps = {
@@ -61,6 +63,7 @@ const defaultProps = {
     disabled:                  false,
     supportedOrientations:     ['portrait', 'landscape'],
     keyboardShouldPersistTaps: 'always',
+    pressClosesOverlay:        false,
 };
 
 export default class ModalSelector extends BaseComponent {
@@ -138,24 +141,27 @@ export default class ModalSelector extends BaseComponent {
 
         });
 
-        return (
-            <View style={[styles.overlayStyle, this.props.overlayStyle]} key={'modalSelector'+(componentIndex++)}>
-                <View style={[styles.optionContainer, this.props.optionContainerStyle]}>
-                    <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}>
-                        <View style={{paddingHorizontal: 10}}>
-                            {options}
-                        </View>
-                    </ScrollView>
-                </View>
-                <View style={styles.cancelContainer}>
-                    <TouchableOpacity onPress={this.close}>
-                        <View style={[styles.cancelStyle, this.props.cancelStyle]}>
-                            <Text style={[styles.cancelTextStyle,this.props.cancelTextStyle]}>{this.props.cancelText}</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
+        const closeOverlay = this.props.pressClosesOverlay;
 
-            </View>);
+        return (
+            <TouchableWithoutFeedback key={'modalSelector' + (componentIndex++)} onPress={() => {closeOverlay && this.close()}}>
+                <View style={[styles.overlayStyle, this.props.overlayStyle]}>
+                    <View style={[styles.optionContainer, this.props.optionContainerStyle]}>
+                        <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}>
+                            <View style={{paddingHorizontal: 10}}>
+                                {options}
+                            </View>
+                        </ScrollView>
+                    </View>
+                    <View style={styles.cancelContainer}>
+                        <TouchableOpacity onPress={this.close}>
+                            <View style={[styles.cancelStyle, this.props.cancelStyle]}>
+                                <Text style={[styles.cancelTextStyle,this.props.cancelTextStyle]}>{this.props.cancelText}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </TouchableWithoutFeedback>);
     }
 
     renderChildren() {
