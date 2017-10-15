@@ -40,7 +40,7 @@ const propTypes = {
     disabled:                  PropTypes.bool,
     supportedOrientations:     PropTypes.arrayOf(PropTypes.oneOf(['portrait', 'landscape', 'portrait-upside-down', 'landscape-left', 'landscape-right'])),
     keyboardShouldPersistTaps: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    pressClosesOverlay:        PropTypes.bool,
+    closeModalOnOverlayPress:  PropTypes.bool,
 };
 
 const defaultProps = {
@@ -63,7 +63,7 @@ const defaultProps = {
     disabled:                  false,
     supportedOrientations:     ['portrait', 'landscape'],
     keyboardShouldPersistTaps: 'always',
-    pressClosesOverlay:        false,
+    closeModalOnOverlayPress:  false,
 };
 
 export default class ModalSelector extends BaseComponent {
@@ -141,7 +141,7 @@ export default class ModalSelector extends BaseComponent {
 
         });
 
-        const closeOverlay = this.props.pressClosesOverlay;
+        const closeOverlay = this.props.closeModalOnOverlayPress;
 
         return (
             <TouchableWithoutFeedback key={'modalSelector' + (componentIndex++)} onPress={() => {closeOverlay && this.close()}}>
