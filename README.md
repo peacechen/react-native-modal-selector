@@ -98,4 +98,4 @@ Prop                | Type     | Optional | Default      | Description
 `optionContainerStyle`| object | Yes      | {}           | style definitions for the option container element
 `cancelStyle`       | object   | Yes      | {}           | style definitions for the cancel element
 `cancelTextStyle`   | object   | Yes      | {}           | style definitions for the cancel text element
-`closeModalOnOverlayPress`| bool   | Yes  | false        | `true` makes the modal close when the overlay is pressed
+`backdropPressToClose`| bool   | Yes  | false        | `true` makes the modal close when the overlay is pressed
