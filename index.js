@@ -15,7 +15,6 @@ import {
 } from 'react-native';
 
 import styles from './style';
-import BaseComponent from './BaseComponent';
 
 const ViewPropTypes = RNViewPropTypes || View.propTypes;
 
@@ -39,7 +38,7 @@ const propTypes = {
     overlayStyle:              ViewPropTypes.style,
     cancelText:                PropTypes.string,
     disabled:                  PropTypes.bool,
-    supportedOrientations:     PropTypes.arrayOf(PropTypes.oneOf(['portrait', 'landscape', 'portrait-upside-down', 'landscape-left', 'landscape-right'])),
+    supportedOrientations:     Modal.propTypes.supportedOrientations,
     keyboardShouldPersistTaps: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     backdropPressToClose:      PropTypes.bool,
 };
