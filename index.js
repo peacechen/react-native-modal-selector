@@ -67,18 +67,11 @@ const defaultProps = {
     backdropPressToClose:      false,
 };
 
-export default class ModalSelector extends BaseComponent {
+export default class ModalSelector extends React.Component {
 
     constructor() {
 
         super();
-
-        this._bind(
-            'onChange',
-            'open',
-            'close',
-            'renderChildren'
-        );
 
         this.state = {
             modalVisible:  false,
@@ -99,7 +92,7 @@ export default class ModalSelector extends BaseComponent {
         }
     }
 
-    onChange(item) {
+    onChange = (item) => {
         if (Platform.OS === 'android' || !Modal.propTypes.onDismiss) {
           // RN >= 0.50 on iOS comes with the onDismiss prop for Modal which solves RN issue #10471
           this.props.onChange(item)
@@ -108,20 +101,20 @@ export default class ModalSelector extends BaseComponent {
         this.close();
     }
 
-    close() {
+    close = () => {
         this.setState({
             modalVisible: false,
         });
     }
 
-    open() {
+    open = () => {
         this.setState({
             modalVisible: true,
             changedItem: undefined,
         });
     }
 
-    renderSection(section) {
+    renderSection = (section) => {
         return (
             <View key={section.key} style={[styles.sectionStyle,this.props.sectionStyle]}>
                 <Text style={[styles.sectionTextStyle,this.props.sectionTextStyle]}>{section.label}</Text>
@@ -129,7 +122,7 @@ export default class ModalSelector extends BaseComponent {
         );
     }
 
-    renderOption(option, isLastItem) {
+    renderOption = (option, isLastItem) => {
         return (
             <TouchableOpacity key={option.key} onPress={() => this.onChange(option)}>
                 <View style={[styles.optionStyle, this.props.optionStyle, isLastItem &&
@@ -139,7 +132,7 @@ export default class ModalSelector extends BaseComponent {
             </TouchableOpacity>);
     }
 
-    renderOptionList() {
+    renderOptionList = () => {
         
         let options = this.props.data.map((item, index) => {
             if (item.section) {
@@ -171,7 +164,7 @@ export default class ModalSelector extends BaseComponent {
             </TouchableWithoutFeedback>);
     }
 
-    renderChildren() {
+    renderChildren = () => {
 
         if(this.props.children) {
             return this.props.children;
