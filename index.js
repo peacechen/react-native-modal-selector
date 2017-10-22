@@ -75,7 +75,6 @@ export default class ModalSelector extends React.Component {
 
         this.state = {
             modalVisible:  false,
-            transparent:   false,
             selected:      'please select',
             changedItem:   undefined,
         };
