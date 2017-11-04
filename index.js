@@ -19,6 +19,7 @@ import BaseComponent from './BaseComponent';
 const ViewPropTypes = RNViewPropTypes || View.propTypes;
 
 let componentIndex = 0;
+let rnVersion = Number.parseFloat(require('react-native/package.json').version);
 
 const propTypes = {
     data:                      PropTypes.array,
@@ -83,6 +84,7 @@ export default class ModalSelector extends BaseComponent {
             modalVisible:  false,
             transparent:   false,
             selected:      'please select',
+            changedItem:   undefined,
         };
     }
 
@@ -98,9 +100,9 @@ export default class ModalSelector extends BaseComponent {
     }
 
     onChange(item) {
-        this.props.onChange(item);
-        this.setState({selected: item.label});
-        this.close();
+        rnVersion < 0.50 && this.props.onChange(item);
+        this.setState({selected: item.label, changedItem: item });
+        this.close()
     }
 
     close() {
@@ -112,6 +114,7 @@ export default class ModalSelector extends BaseComponent {
     open() {
         this.setState({
             modalVisible: true,
+            changedItem: undefined,
         });
     }
 
@@ -186,6 +189,7 @@ export default class ModalSelector extends BaseComponent {
                 visible={this.state.modalVisible}
                 onRequestClose={this.close}
                 animationType={this.props.animationType}
+                onDismiss={() => this.state.changedItem && this.props.onChange(this.state.changedItem)}
             >
                 {this.renderOptionList()}
             </Modal>
