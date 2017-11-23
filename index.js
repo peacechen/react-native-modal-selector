@@ -126,24 +126,25 @@ export default class ModalSelector extends BaseComponent {
         );
     }
 
-    renderOption(option) {
+    renderOption(option, isLastItem) {
         return (
             <TouchableOpacity key={option.key} onPress={() => this.onChange(option)}>
-                <View style={[styles.optionStyle, this.props.optionStyle]}>
+                <View style={[styles.optionStyle, this.props.optionStyle, isLastItem &&
+                    {borderBottomWidth: 0}]}>
                     <Text style={[styles.optionTextStyle,this.props.optionTextStyle]}>{option.label}</Text>
                 </View>
             </TouchableOpacity>);
     }
 
     renderOptionList() {
-        let options = this.props.data.map(item => {
+        
+        let options = this.props.data.map((item, index) => {
             if (item.section) {
                 return this.renderSection(item);
             }
-            return this.renderOption(item);
-
+            return this.renderOption(item, index === this.props.data.length - 1);
         });
-
+        
         const closeOverlay = this.props.backdropPressToClose;
 
         return (
