@@ -68,20 +68,15 @@ const defaultProps = {
 
 export default class ModalSelector extends React.Component {
 
-    constructor() {
-
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             modalVisible:  false,
-            selected:      'please select',
+            selected:      props.initValue,
+            cancelText:    props.cancelText,
             changedItem:   undefined,
         };
-    }
-
-    componentDidMount() {
-        this.setState({selected: this.props.initValue});
-        this.setState({cancelText: this.props.cancelText});
     }
 
     componentWillReceiveProps(nextProps) {
