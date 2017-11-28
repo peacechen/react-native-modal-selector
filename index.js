@@ -83,10 +83,10 @@ export default class ModalSelector extends BaseComponent {
         );
 
         this.state = {
-            modalVisible:  false,
-            transparent:   false,
-            selected:      'please select',
-            changedItem:   undefined,
+            modalVisible: false,
+            transparent:  false,
+            selected:     'please select',
+            changedItem:  undefined,
         };
     }
 
@@ -104,7 +104,7 @@ export default class ModalSelector extends BaseComponent {
     onChange(item) {
         if (Platform.OS === 'android' || !Modal.propTypes.onDismiss) {
             // RN >= 0.50 on iOS comes with the onDismiss prop for Modal which solves RN issue #10471
-            this.props.onChange(item)
+            this.props.onChange(item);
         }
         this.setState({selected: item.label, changedItem: item });
         this.close();
@@ -119,7 +119,7 @@ export default class ModalSelector extends BaseComponent {
     open() {
         this.setState({
             modalVisible: true,
-            changedItem: undefined,
+            changedItem:  undefined,
         });
     }
 
@@ -153,7 +153,9 @@ export default class ModalSelector extends BaseComponent {
         const closeOverlay = this.props.backdropPressToClose;
 
         return (
-            <TouchableWithoutFeedback key={'modalSelector' + (componentIndex++)} onPress={() => {closeOverlay && this.close()}}>
+            <TouchableWithoutFeedback key={'modalSelector' + (componentIndex++)} onPress={() => {
+                closeOverlay && this.close();
+            }}>
                 <View style={[styles.overlayStyle, this.props.overlayStyle]}>
                     <View style={[styles.optionContainer, this.props.optionContainerStyle]}>
                         <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}>
