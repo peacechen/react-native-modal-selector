@@ -43,6 +43,7 @@ const propTypes = {
     supportedOrientations:     PropTypes.arrayOf(PropTypes.oneOf(['portrait', 'landscape', 'portrait-upside-down', 'landscape-left', 'landscape-right'])),
     keyboardShouldPersistTaps: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     backdropPressToClose:      PropTypes.bool,
+    testID:                    PropTypes.string,
 };
 
 const defaultProps = {
@@ -67,6 +68,7 @@ const defaultProps = {
     supportedOrientations:     ['portrait', 'landscape'],
     keyboardShouldPersistTaps: 'always',
     backdropPressToClose:      false,
+    testID:                    null,
 };
 
 export default class ModalSelector extends BaseComponent {
@@ -133,7 +135,7 @@ export default class ModalSelector extends BaseComponent {
 
     renderOption(option, isLastItem) {
         return (
-            <TouchableOpacity key={option.key} onPress={() => this.onChange(option)}>
+            <TouchableOpacity key={option.key} onPress={() => this.onChange(option)} testID={option.testID}>
                 <View style={[styles.optionStyle, this.props.optionStyle, isLastItem &&
                 {borderBottomWidth: 0}]}>
                     <Text style={[styles.optionTextStyle,this.props.optionTextStyle]}>{option.label}</Text>
@@ -204,7 +206,7 @@ export default class ModalSelector extends BaseComponent {
         );
 
         return (
-            <View style={this.props.style}>
+            <View style={this.props.style} testID={this.props.testID}>
                 {dp}
                 <TouchableOpacity onPress={this.open} disabled={this.props.disabled}>
                     <View pointerEvents="none">
