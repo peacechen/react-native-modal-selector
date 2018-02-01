@@ -100,3 +100,4 @@ Prop                | Type     | Optional | Default      | Description
 `cancelTextStyle`   | object   | Yes      | {}           | style definitions for the cancel text element
 `cancelContainerStyle`| object | Yes      | {}           | style definitions for the cancel container
 `backdropPressToClose`| bool   | Yes  | false        | `true` makes the modal close when the overlay is pressed
+`testID`| string   | Yes  | null        | ID for testing purposes
