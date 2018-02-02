@@ -33,6 +33,7 @@ const propTypes = {
     optionContainerStyle:      ViewPropTypes.style,
     sectionStyle:              ViewPropTypes.style,
     sectionTextStyle:          Text.propTypes.style,
+    cancelContainerStyle:      ViewPropTypes.style,
     cancelStyle:               ViewPropTypes.style,
     cancelTextStyle:           Text.propTypes.style,
     overlayStyle:              ViewPropTypes.style,
@@ -56,6 +57,7 @@ const defaultProps = {
     optionContainerStyle:      {},
     sectionStyle:              {},
     sectionTextStyle:          {},
+    cancelContainerStyle:      {},
     cancelStyle:               {},
     cancelTextStyle:           {},
     overlayStyle:              {},
@@ -87,8 +89,8 @@ export default class ModalSelector extends React.Component {
 
     onChange = (item) => {
         if (Platform.OS === 'android' || !Modal.propTypes.onDismiss) {
-          // RN >= 0.50 on iOS comes with the onDismiss prop for Modal which solves RN issue #10471
-          this.props.onChange(item)
+            // RN >= 0.50 on iOS comes with the onDismiss prop for Modal which solves RN issue #10471
+            this.props.onChange(item);
         }
         this.setState({selected: item.label, changedItem: item });
         this.close();
@@ -103,7 +105,7 @@ export default class ModalSelector extends React.Component {
     open = () => {
         this.setState({
             modalVisible: true,
-            changedItem: undefined,
+            changedItem:  undefined,
         });
     }
 
@@ -119,25 +121,27 @@ export default class ModalSelector extends React.Component {
         return (
             <TouchableOpacity key={option.key} onPress={() => this.onChange(option)}>
                 <View style={[styles.optionStyle, this.props.optionStyle, isLastItem &&
-                    {borderBottomWidth: 0}]}>
+                {borderBottomWidth: 0}]}>
                     <Text style={[styles.optionTextStyle,this.props.optionTextStyle]}>{option.label}</Text>
                 </View>
             </TouchableOpacity>);
     }
 
     renderOptionList = () => {
-        
+
         let options = this.props.data.map((item, index) => {
             if (item.section) {
                 return this.renderSection(item);
             }
             return this.renderOption(item, index === this.props.data.length - 1);
         });
-        
+
         const closeOverlay = this.props.backdropPressToClose;
 
         return (
-            <TouchableWithoutFeedback key={'modalSelector' + (componentIndex++)} onPress={() => {closeOverlay && this.close()}}>
+            <TouchableWithoutFeedback key={'modalSelector' + (componentIndex++)} onPress={() => {
+                closeOverlay && this.close();
+            }}>
                 <View style={[styles.overlayStyle, this.props.overlayStyle]}>
                     <View style={[styles.optionContainer, this.props.optionContainerStyle]}>
                         <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}>
@@ -146,7 +150,7 @@ export default class ModalSelector extends React.Component {
                             </View>
                         </ScrollView>
                     </View>
-                    <View style={styles.cancelContainer}>
+                    <View style={[styles.cancelContainer, this.props.cancelContainerStyle]}>
                         <TouchableOpacity onPress={this.close}>
                             <View style={[styles.cancelStyle, this.props.cancelStyle]}>
                                 <Text style={[styles.cancelTextStyle,this.props.cancelTextStyle]}>{this.props.cancelText}</Text>

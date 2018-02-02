@@ -1,6 +1,6 @@
 {
   "name": "react-native-modal-selector",
-  "version": "0.0.22",
+  "version": "0.0.24",
   "description": "A cross-platform (iOS / Android), selector/picker component for React Native that is highly customizable and supports sections.",
   "main": "index.js",
   "scripts": {
