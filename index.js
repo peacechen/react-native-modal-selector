@@ -119,7 +119,7 @@ export default class ModalSelector extends React.Component {
 
     renderOption = (option, isLastItem) => {
         return (
-            <TouchableOpacity key={option.key} onPress={() => this.onChange(option)}>
+            <TouchableOpacity key={option.key} onPress={() => this.onChange(option)} accessible={true} accessibilityLabel={option.accessibilityLabel || undefined}>
                 <View style={[styles.optionStyle, this.props.optionStyle, isLastItem &&
                 {borderBottomWidth: 0}]}>
                     <Text style={[styles.optionTextStyle,this.props.optionTextStyle]}>{option.label}</Text>
@@ -144,14 +144,14 @@ export default class ModalSelector extends React.Component {
             }}>
                 <View style={[styles.overlayStyle, this.props.overlayStyle]}>
                     <View style={[styles.optionContainer, this.props.optionContainerStyle]}>
-                        <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}>
+                        <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} accessible={true} accessibilityLabel={'Scrollable options'}>
                             <View style={{paddingHorizontal: 10}}>
                                 {options}
                             </View>
                         </ScrollView>
                     </View>
                     <View style={[styles.cancelContainer, this.props.cancelContainerStyle]}>
-                        <TouchableOpacity onPress={this.close}>
+                        <TouchableOpacity onPress={this.close} accessible={true} accessibilityLabel={'Cancel Button'}>
                             <View style={[styles.cancelStyle, this.props.cancelStyle]}>
                                 <Text style={[styles.cancelTextStyle,this.props.cancelTextStyle]}>{this.props.cancelText}</Text>
                             </View>
