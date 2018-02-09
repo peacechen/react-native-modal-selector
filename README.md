@@ -40,7 +40,7 @@ class SampleApp extends Component {
             { key: index++, section: true, label: 'Fruits' },
             { key: index++, label: 'Red Apples' },
             { key: index++, label: 'Cherries' },
-            { key: index++, label: 'Cranberries' },
+            { key: index++, label: 'Cranberries', accessibilityLabel: 'Tap here for cranberries' },
             // etc...
             // Can also add additional custom keys which are passed to the onChange callback
             { key: index++, label: 'Vegetable', customKey: 'Not a fruit' }
@@ -60,6 +60,9 @@ class SampleApp extends Component {
                     data={data}
                     initValue="Select something yummy!"
                     supportedOrientations={['landscape']}
+                    accessible={true}
+                    scrollViewAccessibilityLabel={'Scrollable options'}
+                    cancelButtonAccessibilityLabel={'Cancel Button'}
                     onChange={(option)=>{ this.setState({textInputValue:option.label})}}>
 
                     <TextInput
@@ -100,3 +103,7 @@ Prop                | Type     | Optional | Default      | Description
 `cancelTextStyle`   | object   | Yes      | {}           | style definitions for the cancel text element
 `cancelContainerStyle`| object | Yes      | {}           | style definitions for the cancel container
 `backdropPressToClose`| bool   | Yes  | false        | `true` makes the modal close when the overlay is pressed
+`accessible`| bool   | Yes  | false        | `true` enables accessibility for modal and options. Note: data items should have an `accessibilityLabel` property if this is enabled
+`scrollViewAccessibilityLabel` | string   | Yes      | undefined | Accessibility label for the modal ScrollView
+`cancelButtonAccessibilityLabel` | string   | Yes      | undefined | Accessibility label for the cancel button
+

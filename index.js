@@ -21,51 +21,57 @@ const ViewPropTypes = RNViewPropTypes || View.propTypes;
 let componentIndex = 0;
 
 const propTypes = {
-    data:                      PropTypes.array,
-    onChange:                  PropTypes.func,
-    initValue:                 PropTypes.string,
-    animationType:             Modal.propTypes.animationType,
-    style:                     ViewPropTypes.style,
-    selectStyle:               ViewPropTypes.style,
-    selectTextStyle:           Text.propTypes.style,
-    optionStyle:               ViewPropTypes.style,
-    optionTextStyle:           Text.propTypes.style,
-    optionContainerStyle:      ViewPropTypes.style,
-    sectionStyle:              ViewPropTypes.style,
-    sectionTextStyle:          Text.propTypes.style,
-    cancelContainerStyle:      ViewPropTypes.style,
-    cancelStyle:               ViewPropTypes.style,
-    cancelTextStyle:           Text.propTypes.style,
-    overlayStyle:              ViewPropTypes.style,
-    cancelText:                PropTypes.string,
-    disabled:                  PropTypes.bool,
-    supportedOrientations:     Modal.propTypes.supportedOrientations,
-    keyboardShouldPersistTaps: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    backdropPressToClose:      PropTypes.bool,
+    data:                           PropTypes.array,
+    onChange:                       PropTypes.func,
+    initValue:                      PropTypes.string,
+    animationType:                  Modal.propTypes.animationType,
+    style:                          ViewPropTypes.style,
+    selectStyle:                    ViewPropTypes.style,
+    selectTextStyle:                Text.propTypes.style,
+    optionStyle:                    ViewPropTypes.style,
+    optionTextStyle:                Text.propTypes.style,
+    optionContainerStyle:           ViewPropTypes.style,
+    sectionStyle:                   ViewPropTypes.style,
+    sectionTextStyle:               Text.propTypes.style,
+    cancelContainerStyle:           ViewPropTypes.style,
+    cancelStyle:                    ViewPropTypes.style,
+    cancelTextStyle:                Text.propTypes.style,
+    overlayStyle:                   ViewPropTypes.style,
+    cancelText:                     PropTypes.string,
+    disabled:                       PropTypes.bool,
+    supportedOrientations:          Modal.propTypes.supportedOrientations,
+    keyboardShouldPersistTaps:      PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    backdropPressToClose:           PropTypes.bool,
+    accessible:                     PropTypes.bool,
+    scrollViewAccessibilityLabel:   PropTypes.string,
+    cancelButtonAccessibilityLabel: PropTypes.string,
 };
 
 const defaultProps = {
-    data:                      [],
-    onChange:                  () => {},
-    initValue:                 'Select me!',
-    animationType:             'slide',
-    style:                     {},
-    selectStyle:               {},
-    selectTextStyle:           {},
-    optionStyle:               {},
-    optionTextStyle:           {},
-    optionContainerStyle:      {},
-    sectionStyle:              {},
-    sectionTextStyle:          {},
-    cancelContainerStyle:      {},
-    cancelStyle:               {},
-    cancelTextStyle:           {},
-    overlayStyle:              {},
-    cancelText:                'cancel',
-    disabled:                  false,
-    supportedOrientations:     ['portrait', 'landscape'],
-    keyboardShouldPersistTaps: 'always',
-    backdropPressToClose:      false,
+    data:                           [],
+    onChange:                       () => {},
+    initValue:                      'Select me!',
+    animationType:                  'slide',
+    style:                          {},
+    selectStyle:                    {},
+    selectTextStyle:                {},
+    optionStyle:                    {},
+    optionTextStyle:                {},
+    optionContainerStyle:           {},
+    sectionStyle:                   {},
+    sectionTextStyle:               {},
+    cancelContainerStyle:           {},
+    cancelStyle:                    {},
+    cancelTextStyle:                {},
+    overlayStyle:                   {},
+    cancelText:                     'cancel',
+    disabled:                       false,
+    supportedOrientations:          ['portrait', 'landscape'],
+    keyboardShouldPersistTaps:      'always',
+    backdropPressToClose:           false,
+    accessible:                     false,
+    scrollViewAccessibilityLabel:   undefined,
+    cancelButtonAccessibilityLabel: undefined,
 };
 
 export default class ModalSelector extends React.Component {
@@ -119,7 +125,7 @@ export default class ModalSelector extends React.Component {
 
     renderOption = (option, isLastItem) => {
         return (
-            <TouchableOpacity key={option.key} onPress={() => this.onChange(option)} accessible={true} accessibilityLabel={option.accessibilityLabel || undefined}>
+            <TouchableOpacity key={option.key} onPress={() => this.onChange(option)} accessible={this.props.accessible} accessibilityLabel={option.accessibilityLabel || undefined}>
                 <View style={[styles.optionStyle, this.props.optionStyle, isLastItem &&
                 {borderBottomWidth: 0}]}>
                     <Text style={[styles.optionTextStyle,this.props.optionTextStyle]}>{option.label}</Text>
@@ -144,14 +150,14 @@ export default class ModalSelector extends React.Component {
             }}>
                 <View style={[styles.overlayStyle, this.props.overlayStyle]}>
                     <View style={[styles.optionContainer, this.props.optionContainerStyle]}>
-                        <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} accessible={true} accessibilityLabel={'Scrollable options'}>
+                        <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} accessible={this.props.accessible} accessibilityLabel={this.props.scrollViewAccessibilityLabel}>
                             <View style={{paddingHorizontal: 10}}>
                                 {options}
                             </View>
                         </ScrollView>
                     </View>
                     <View style={[styles.cancelContainer, this.props.cancelContainerStyle]}>
-                        <TouchableOpacity onPress={this.close} accessible={true} accessibilityLabel={'Cancel Button'}>
+                        <TouchableOpacity onPress={this.close} accessible={this.props.accessible} accessibilityLabel={this.props.cancelButtonAccessibilityLabel}>
                             <View style={[styles.cancelStyle, this.props.cancelStyle]}>
                                 <Text style={[styles.cancelTextStyle,this.props.cancelTextStyle]}>{this.props.cancelText}</Text>
                             </View>
