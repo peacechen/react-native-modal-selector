@@ -88,7 +88,7 @@ Prop                | Type     | Optional | Default      | Description
 `cancelText`        | string   | Yes      | `cancel`     | text of the cancel button
 `animationType`     | string   | Yes      | `slide`      | type of animation to be used to show the modal. Must be one of `none`, `slide` or `fade`.
 `disabled`          | bool     | Yes      | false        | `true` disables opening of the modal
-`containerStyle`    | object   | Yes      | {}           | style definitions for the container view
+`childrenContainerStyle`| object   | Yes      | {}           | style definitions for the children container view
 `touchableStyle`    | object   | Yes      | {}           | style definitions for the touchable element
 `supportedOrientations`    | ['portrait', 'landscape'] | Yes      | both      | orientations the modal supports
 `keyboardShouldPersistTaps`| `string` / `bool`         | Yes      | `always`  | passed to underlying ScrollView
