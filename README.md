@@ -40,7 +40,7 @@ class SampleApp extends Component {
             { key: index++, section: true, label: 'Fruits' },
             { key: index++, label: 'Red Apples' },
             { key: index++, label: 'Cherries' },
-            { key: index++, label: 'Cranberries' },
+            { key: index++, label: 'Cranberries', accessibilityLabel: 'Tap here for cranberries' },
             // etc...
             // Can also add additional custom keys which are passed to the onChange callback
             { key: index++, label: 'Vegetable', customKey: 'Not a fruit' }
@@ -60,6 +60,9 @@ class SampleApp extends Component {
                     data={data}
                     initValue="Select something yummy!"
                     supportedOrientations={['landscape']}
+                    accessible={true}
+                    scrollViewAccessibilityLabel={'Scrollable options'}
+                    cancelButtonAccessibilityLabel={'Cancel Button'}
                     onChange={(option)=>{ this.setState({textInputValue:option.label})}}>
 
                     <TextInput
@@ -85,6 +88,8 @@ Prop                | Type     | Optional | Default      | Description
 `cancelText`        | string   | Yes      | `cancel`     | text of the cancel button
 `animationType`     | string   | Yes      | `slide`      | type of animation to be used to show the modal. Must be one of `none`, `slide` or `fade`.
 `disabled`          | bool     | Yes      | false        | `true` disables opening of the modal
+`childrenContainerStyle`| object   | Yes      | {}           | style definitions for the children container view
+`touchableStyle`    | object   | Yes      | {}           | style definitions for the touchable element
 `supportedOrientations`    | ['portrait', 'landscape'] | Yes      | both      | orientations the modal supports
 `keyboardShouldPersistTaps`| `string` / `bool`         | Yes      | `always`  | passed to underlying ScrollView
 `style`             | object   | Yes      |              | style definitions for the root element
@@ -100,4 +105,7 @@ Prop                | Type     | Optional | Default      | Description
 `cancelTextStyle`   | object   | Yes      | {}           | style definitions for the cancel text element
 `cancelContainerStyle`| object | Yes      | {}           | style definitions for the cancel container
 `backdropPressToClose`| bool   | Yes  | false        | `true` makes the modal close when the overlay is pressed
-`testID`| string   | Yes  | null        | ID for testing purposes
+`passThruProps`| object   | Yes  | {}        | props to pass through to the container View and each option TouchableOpacity (e.g. testID for testing)
+`accessible`| bool   | Yes  | false        | `true` enables accessibility for modal and options. Note: data items should have an `accessibilityLabel` property if this is enabled
+`scrollViewAccessibilityLabel` | string   | Yes      | undefined | Accessibility label for the modal ScrollView
+`cancelButtonAccessibilityLabel` | string   | Yes      | undefined | Accessibility label for the cancel button
