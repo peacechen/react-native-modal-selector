@@ -34,6 +34,7 @@ const propTypes = {
     sectionStyle:                   ViewPropTypes.style,
     childrenContainerStyle:         ViewPropTypes.style,
     touchableStyle:                 ViewPropTypes.style,
+    touchableActiveOpacity:         PropTypes.number,
     sectionTextStyle:               Text.propTypes.style,
     cancelContainerStyle:           ViewPropTypes.style,
     cancelStyle:                    ViewPropTypes.style,
@@ -63,6 +64,7 @@ const defaultProps = {
     sectionStyle:                   {},
     childrenContainerStyle:         {},
     touchableStyle:                 {},
+    touchableActiveOpacity:         0.2,
     sectionTextStyle:               {},
     cancelContainerStyle:           {},
     cancelStyle:                    {},
@@ -202,7 +204,7 @@ export default class ModalSelector extends React.Component {
         return (
             <View style={this.props.style}>
                 {dp}
-                <TouchableOpacity style={this.props.touchableStyle} onPress={this.open} disabled={this.props.disabled}>
+                <TouchableOpacity activeOpacity={this.props.touchableActiveOpacity} style={this.props.touchableStyle} onPress={this.open} disabled={this.props.disabled}>
                     <View style={this.props.childrenContainerStyle} pointerEvents="none">
                         {this.renderChildren()}
                     </View>
