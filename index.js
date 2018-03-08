@@ -23,6 +23,8 @@ let componentIndex = 0;
 const propTypes = {
     data:                           PropTypes.array,
     onChange:                       PropTypes.func,
+    keyExtractor:                   PropTypes.func,
+    labelExtractor:                 PropTypes.func,
     initValue:                      PropTypes.string,
     animationType:                  Modal.propTypes.animationType,
     style:                          ViewPropTypes.style,
@@ -53,6 +55,8 @@ const propTypes = {
 const defaultProps = {
     data:                           [],
     onChange:                       () => {},
+    keyExtractor:                   (item) => item.key,
+    labelExtractor:                 (item) => item.label,
     initValue:                      'Select me!',
     animationType:                  'slide',
     style:                          {},
@@ -104,7 +108,7 @@ export default class ModalSelector extends React.Component {
             // RN >= 0.50 on iOS comes with the onDismiss prop for Modal which solves RN issue #10471
             this.props.onChange(item);
         }
-        this.setState({selected: item.label, changedItem: item });
+        this.setState({selected: this.props.labelExtractor(item), changedItem: item });
         this.close();
     }
 
@@ -123,8 +127,8 @@ export default class ModalSelector extends React.Component {
 
     renderSection = (section) => {
         return (
-            <View key={section.key} style={[styles.sectionStyle,this.props.sectionStyle]}>
-                <Text style={[styles.sectionTextStyle,this.props.sectionTextStyle]}>{section.label}</Text>
+            <View key={this.props.keyExtractor(section)} style={[styles.sectionStyle,this.props.sectionStyle]}>
+                <Text style={[styles.sectionTextStyle,this.props.sectionTextStyle]}>{this.props.labelExtractor(section)}</Text>
             </View>
         );
     }
@@ -132,7 +136,7 @@ export default class ModalSelector extends React.Component {
     renderOption = (option, isLastItem) => {
         return (
             <TouchableOpacity
-              key={option.key}
+              key={this.props.keyExtractor(option)}
               onPress={() => this.onChange(option)}
               accessible={this.props.accessible}
               accessibilityLabel={option.accessibilityLabel || undefined}
@@ -140,7 +144,7 @@ export default class ModalSelector extends React.Component {
             >
                 <View style={[styles.optionStyle, this.props.optionStyle, isLastItem &&
                 {borderBottomWidth: 0}]}>
-                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle]}>{option.label}</Text>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle]}>{this.props.labelExtractor(option)}</Text>
                 </View>
             </TouchableOpacity>);
     }

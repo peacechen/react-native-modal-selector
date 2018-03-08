@@ -84,6 +84,8 @@ Prop                | Type     | Optional | Default      | Description
 ------------------- | -------- | -------- | ------------ | -----------
 `data`              | array    | No       | []           | array of objects with a unique key and label to select in the modal.
 `onChange`          | function | Yes      | () => {}     | callback function, when the users has selected an option
+`keyExtractor       | function | Yes      | (data) => data.key   | extract the key from the data item
+`labelExtractor     | function | Yes      | (data) => data.label | extract the label from the data item
 `initValue`         | string   | Yes      | `Select me!` | text that is initially shown on the button
 `cancelText`        | string   | Yes      | `cancel`     | text of the cancel button
 `animationType`     | string   | Yes      | `slide`      | type of animation to be used to show the modal. Must be one of `none`, `slide` or `fade`.
