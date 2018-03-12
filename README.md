@@ -78,6 +78,26 @@ class SampleApp extends Component {
 }
 ```
 
+## Data Format
+
+The selector accept a specific format of data:
+```javascript
+[{ key: 5, label: 'Red Apples' }]
+```
+
+If your data has a specific format, you can define extractors of data, example:
+```javascript
+this.setState({data: [{ id: 5, name: 'Red Apples' }]});
+
+return (
+  <ModalSelector
+     data={this.state.data}
+     keyExtractor= {(item) => item.id}
+     labelExtractor= {(item) => item.name}/>
+);
+```
+
+
 ## API
 ### Props
 Prop                | Type     | Optional | Default      | Description
