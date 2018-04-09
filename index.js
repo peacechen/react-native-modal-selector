@@ -23,6 +23,8 @@ let componentIndex = 0;
 const propTypes = {
     data:                           PropTypes.array,
     onChange:                       PropTypes.func,
+    onModalOpen:                    PropTypes.func,
+    onModalClose:                   PropTypes.func,
     keyExtractor:                   PropTypes.func,
     labelExtractor:                 PropTypes.func,
     initValue:                      PropTypes.string,
@@ -56,6 +58,8 @@ const propTypes = {
 const defaultProps = {
     data:                           [],
     onChange:                       () => {},
+    onModalOpen:                    () => {},
+    onModalClose:                   () => {},
     keyExtractor:                   (item) => item.key,
     labelExtractor:                 (item) => item.label,
     initValue:                      'Select me!',
@@ -115,12 +119,14 @@ export default class ModalSelector extends React.Component {
     }
 
     close = () => {
+        this.props.onModalClose();
         this.setState({
             modalVisible: false,
         });
     }
 
     open = () => {
+        this.props.onModalOpen();
         this.setState({
             modalVisible: true,
             changedItem:  undefined,

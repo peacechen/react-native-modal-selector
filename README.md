@@ -104,6 +104,8 @@ Prop                | Type     | Optional | Default      | Description
 ------------------- | -------- | -------- | ------------ | -----------
 `data`              | array    | No       | []           | array of objects with a unique key and label to select in the modal.
 `onChange`          | function | Yes      | () => {}     | callback function, when the users has selected an option
+`onModalOpen`       | function | Yes      | () => {}     | callback function, when modal is opening
+`onModalClose`      | function | Yes      | () => {}     | callback function, when modal is closing
 `keyExtractor       | function | Yes      | (data) => data.key   | extract the key from the data item
 `labelExtractor     | function | Yes      | (data) => data.label | extract the label from the data item
 `initValue`         | string   | Yes      | `Select me!` | text that is initially shown on the button
