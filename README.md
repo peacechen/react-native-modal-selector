@@ -136,4 +136,4 @@ Prop                | Type     | Optional | Default      | Description
 `accessible`| bool   | Yes  | false        | `true` enables accessibility for modal and options. Note: data items should have an `accessibilityLabel` property if this is enabled
 `scrollViewAccessibilityLabel` | string   | Yes      | undefined | Accessibility label for the modal ScrollView
 `cancelButtonAccessibilityLabel` | string   | Yes      | undefined | Accessibility label for the cancel button
-`hitSlop` | object | Yes | {} | How far touch can stray away from touchable that opens modal ([RN docs](https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#hitslop))
+`modalOpenerHitSlop` | object | Yes | {} | How far touch can stray away from touchable that opens modal ([RN docs](https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#hitslop))

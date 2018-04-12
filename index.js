@@ -54,7 +54,7 @@ const propTypes = {
     scrollViewAccessibilityLabel:   PropTypes.string,
     cancelButtonAccessibilityLabel: PropTypes.string,
     passThruProps:                  PropTypes.object,
-    hitSlop:                        PropTypes.object,
+    modalOpenerHitSlop:             PropTypes.object,
 };
 
 const defaultProps = {
@@ -91,7 +91,7 @@ const defaultProps = {
     scrollViewAccessibilityLabel:   undefined,
     cancelButtonAccessibilityLabel: undefined,
     passThruProps:                  {},
-    hitSlop:                        {},
+    modalOpenerHitSlop:             {},
 };
 
 export default class ModalSelector extends React.Component {
@@ -128,7 +128,7 @@ export default class ModalSelector extends React.Component {
             // RN >= 0.50 on iOS comes with the onDismiss prop for Modal which solves RN issue #10471
             this.props.onChange(item);
         }
-        this.setState({selected: this.props.labelExtractor(item), changedItem: item });
+        this.setState({ selected: this.props.labelExtractor(item), changedItem: item });
         this.close();
     }
 
@@ -237,7 +237,7 @@ export default class ModalSelector extends React.Component {
         return (
             <View style={this.props.style} {...this.props.passThruProps}>
                 {dp}
-                <TouchableOpacity hitSlop={this.props.hitSlop} activeOpacity={this.props.touchableActiveOpacity} style={this.props.touchableStyle} onPress={this.open} disabled={this.props.disabled}>
+                <TouchableOpacity hitSlop={this.props.modalOpenerHitSlop} activeOpacity={this.props.touchableActiveOpacity} style={this.props.touchableStyle} onPress={this.open} disabled={this.props.disabled}>
                     <View style={this.props.childrenContainerStyle} pointerEvents="none">
                         {this.renderChildren()}
                     </View>
