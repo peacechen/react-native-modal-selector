@@ -91,7 +91,7 @@ const defaultProps = {
     scrollViewAccessibilityLabel:   undefined,
     cancelButtonAccessibilityLabel: undefined,
     passThruProps:                  {},
-    modalOpenerHitSlop:             {},
+    modalOpenerHitSlop:             {top: 0, bottom: 0, left: 0, right: 0},
 };
 
 export default class ModalSelector extends React.Component {
