@@ -1,4 +1,4 @@
-# react-native-modal-selector [![npm version](https://badge.fury.io/js/react-native-modal-selector.svg)](https://badge.fury.io/js/react-native-modal-selector)
+# react-native-modal-selector with multiselect feature [![npm version](https://badge.fury.io/js/react-native-modal-selector.svg)](https://badge.fury.io/js/react-native-modal-selector)
 
 A cross-platform (iOS / Android), selector/picker component for React Native that is highly customizable and supports sections.
 
@@ -110,6 +110,7 @@ Prop                | Type     | Optional | Default      | Description
 `keyExtractor`      | function | Yes      | (data) => data.key   | extract the key from the data item
 `labelExtractor`    | function | Yes      | (data) => data.label | extract the label from the data item
 `visible`           | bool     | Yes      | false        | control open/close state of modal
+`multiple`          | bool     | No       | false        | Allow selection of multiple options
 `initValue`         | string   | Yes      | `Select me!` | text that is initially shown on the button
 `cancelText`        | string   | Yes      | `cancel`     | text of the cancel button
 `animationType`     | string   | Yes      | `slide`      | type of animation to be used to show the modal. Must be one of `none`, `slide` or `fade`.
