@@ -56,6 +56,7 @@ const propTypes = {
     cancelButtonAccessibilityLabel: PropTypes.string,
     passThruProps:                  PropTypes.object,
     modalOpenerHitSlop:             PropTypes.object,
+    customSelector:                 PropTypes.node,
 };
 
 const defaultProps = {
@@ -94,6 +95,7 @@ const defaultProps = {
     cancelButtonAccessibilityLabel: undefined,
     passThruProps:                  {},
     modalOpenerHitSlop:             {top: 0, bottom: 0, left: 0, right: 0},
+    customSelector:                 undefined,
 };
 
 export default class ModalSelector extends React.Component {
@@ -241,11 +243,21 @@ export default class ModalSelector extends React.Component {
         return (
             <View style={this.props.style} {...this.props.passThruProps}>
                 {dp}
-                <TouchableOpacity hitSlop={this.props.modalOpenerHitSlop} activeOpacity={this.props.touchableActiveOpacity} style={this.props.touchableStyle} onPress={this.open} disabled={this.props.disabled}>
-                    <View style={this.props.childrenContainerStyle} pointerEvents="none">
-                        {this.renderChildren()}
-                    </View>
-                </TouchableOpacity>
+                {this.props.customSelector ?
+                    this.props.customSelector
+                    :
+                    <TouchableOpacity
+                        hitSlop={this.props.modalOpenerHitSlop}
+                        activeOpacity={this.props.touchableActiveOpacity}
+                        style={this.props.touchableStyle}
+                        onPress={this.open}
+                        disabled={this.props.disabled}
+                    >
+                        <View style={this.props.childrenContainerStyle} pointerEvents="none">
+                            {this.renderChildren()}
+                        </View>
+                    </TouchableOpacity>
+                }
             </View>
         );
     }
