@@ -182,7 +182,7 @@ export default class ModalSelector extends React.Component {
         const closeOverlay = this.props.backdropPressToClose;
 
         return (
-            <TouchableWithoutFeedback key={'modalSelector' + (componentIndex++)} onPress={() => {
+            <TouchableWithoutFeedback key={'modalSelector' + (componentIndex++)}  accessible={false} onPress={() => {
                 closeOverlay && this.close();
             }}>
                 <View style={[styles.overlayStyle, this.props.overlayStyle]}>
