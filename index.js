@@ -28,6 +28,7 @@ const propTypes = {
     keyExtractor:                   PropTypes.func,
     labelExtractor:                 PropTypes.func,
     visible:                        PropTypes.bool,
+    closeOnChange:                  PropTypes.bool,
     initValue:                      PropTypes.string,
     animationType:                  Modal.propTypes.animationType,
     style:                          ViewPropTypes.style,
@@ -65,6 +66,7 @@ const defaultProps = {
     keyExtractor:                   (item) => item.key,
     labelExtractor:                 (item) => item.label,
     visible:                        false,
+    closeOnChange:                  true,
     initValue:                      'Select me!',
     animationType:                  'slide',
     style:                          {},
@@ -129,7 +131,9 @@ export default class ModalSelector extends React.Component {
             this.props.onChange(item);
         }
         this.setState({ selected: this.props.labelExtractor(item), changedItem: item });
-        this.close();
+        
+        if (this.props.closeOnChange)
+            this.close();
     }
 
     close = () => {
