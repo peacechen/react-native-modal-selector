@@ -110,6 +110,7 @@ Prop                | Type     | Optional | Default      | Description
 `keyExtractor`      | function | Yes      | (data) => data.key   | extract the key from the data item
 `labelExtractor`    | function | Yes      | (data) => data.label | extract the label from the data item
 `visible`           | bool     | Yes      | false        | control open/close state of modal
+`closeOnChange`´    | bool     | Yes      | true         | control if modal closes on select
 `initValue`         | string   | Yes      | `Select me!` | text that is initially shown on the button
 `cancelText`        | string   | Yes      | `cancel`     | text of the cancel button
 `animationType`     | string   | Yes      | `slide`      | type of animation to be used to show the modal. Must be one of `none`, `slide` or `fade`.
