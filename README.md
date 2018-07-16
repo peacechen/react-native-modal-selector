@@ -126,6 +126,7 @@ Prop                | Type     | Optional | Default      | Description
 `overlayStyle`      | object   | Yes      | { flex: 1, padding: '5%', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.7)' } | style definitions for the overlay background element. RN <= 0.41 should override this with pixel value for padding.
 `sectionStyle`      | object   | Yes      | {}           | style definitions for the section element
 `sectionTextStyle`  | object   | Yes      | {}           | style definitions for the select text element
+`selectedItemTextStyle` | object | Yes    | {}           | style definitions for the currently selected text element
 `optionStyle`       | object   | Yes      | {}           | style definitions for the option element
 `optionTextStyle`   | object   | Yes      | {}           | style definitions for the option text element
 `optionContainerStyle`| object | Yes      | {}           | style definitions for the option container element
