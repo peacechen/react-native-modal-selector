@@ -42,6 +42,7 @@ const propTypes = {
     touchableStyle:                 ViewPropTypes.style,
     touchableActiveOpacity:         PropTypes.number,
     sectionTextStyle:               Text.propTypes.style,
+    selectedItemTextStyle:          Text.propTypes.style,
     cancelContainerStyle:           ViewPropTypes.style,
     cancelStyle:                    ViewPropTypes.style,
     cancelTextStyle:                Text.propTypes.style,
@@ -80,6 +81,7 @@ const defaultProps = {
     touchableStyle:                 {},
     touchableActiveOpacity:         0.2,
     sectionTextStyle:               {},
+    selectedItemTextStyle:          {},
     cancelContainerStyle:           {},
     cancelStyle:                    {},
     cancelTextStyle:                {},
@@ -160,6 +162,9 @@ export default class ModalSelector extends React.Component {
     }
 
     renderOption = (option, isLastItem) => {
+        const optionLabel = this.props.labelExtractor(option);
+        const isSelectedItem = optionLabel === this.state.selected;
+
         return (
             <TouchableOpacity
               key={this.props.keyExtractor(option)}
@@ -171,7 +176,10 @@ export default class ModalSelector extends React.Component {
             >
                 <View style={[styles.optionStyle, this.props.optionStyle, isLastItem &&
                 {borderBottomWidth: 0}]}>
-                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle]}>{this.props.labelExtractor(option)}</Text>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle,
+                                 isSelectedItem && this.props.selectedItemTextStyle]}>
+                        {optionLabel}
+                    </Text>
                 </View>
             </TouchableOpacity>);
     }
