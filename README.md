@@ -16,7 +16,7 @@ npm i react-native-modal-selector --save
 
 ## Usage
 
-You can either use this component as an wrapper around your existing component or use it in its default mode. In default mode a customizable button is rendered.
+You can either use this component in its default mode, as a wrapper around your existing component or provide a custom component (where you need to control opening of the modal yourself). In default mode a customizable button is rendered.
 
 See `SampleApp` for an example how to use this component.
 
@@ -72,6 +72,13 @@ class SampleApp extends Component {
                         value={this.state.textInputValue} />
 
                 </ModalSelector>
+
+                // Custom component
+                <ModalSelector
+                    data={data}
+                    ref={selector => { this.selector = selector; }}
+                    customSelector={<Switch onValueChange={() => this.selector.open()} />}
+                />
             </View>
         );
     }

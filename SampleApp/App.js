@@ -4,7 +4,8 @@ import React, { Component } from 'react';
 
 import {
     View,
-    TextInput
+    TextInput,
+    Switch
 } from 'react-native';
 
 import ModalSelector from 'react-native-modal-selector'
@@ -64,6 +65,21 @@ class SampleApp extends Component {
                         value={this.state.textInputValue} />
 
                 </ModalSelector>
+
+                { /*
+                    Custom mode: you have to provide a react-native component that have to
+                    control how the selector should open (and for this you need a ref to the modal)
+                 */ }
+                <ModalSelector
+                    data={data}
+                    ref={selector => { this.selector = selector; }}
+                    customSelector={
+                        <Switch
+                            style={{ alignSelf: 'center' }}
+                            onValueChange={() => this.selector.open()}
+                        />
+                    }
+                />
             </View>
         );
     }
