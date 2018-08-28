@@ -138,7 +138,7 @@ export default class ModalSelector extends React.Component {
         });
     }
 
-    getChangedItem() {
+    getSelectedItem() {
       return this.state.changedItem;
     }
 
