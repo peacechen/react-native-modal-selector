@@ -53,6 +53,8 @@ const propTypes = {
     keyboardShouldPersistTaps:      PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     backdropPressToClose:           PropTypes.bool,
     accessible:                     PropTypes.bool,
+    cancelButtonAccessible:         PropTypes.bool,
+    scrollViewAccessible:           PropTypes.bool,
     scrollViewAccessibilityLabel:   PropTypes.string,
     cancelButtonAccessibilityLabel: PropTypes.string,
     passThruProps:                  PropTypes.object,
@@ -93,6 +95,8 @@ const defaultProps = {
     keyboardShouldPersistTaps:      'always',
     backdropPressToClose:           false,
     accessible:                     false,
+    cancelButtonAccessible:         false,
+    scrollViewAccessible:           false,
     scrollViewAccessibilityLabel:   undefined,
     cancelButtonAccessibilityLabel: undefined,
     passThruProps:                  {},
@@ -167,7 +171,7 @@ export default class ModalSelector extends React.Component {
         );
     }
 
-    renderOption = (option, isLastItem) => {
+    renderOption = (option, isLastItem, isFirstItem) => {
         const optionLabel = this.props.labelExtractor(option);
         const isSelectedItem = optionLabel === this.state.selected;
 
@@ -178,6 +182,7 @@ export default class ModalSelector extends React.Component {
               activeOpacity={this.props.touchableActiveOpacity}
               accessible={this.props.accessible}
               accessibilityLabel={option.accessibilityLabel || undefined}
+              importantForAccessibility={isFirstItem}
               {...this.props.passThruProps}
             >
                 <View style={[styles.optionStyle, this.props.optionStyle, isLastItem &&
@@ -196,7 +201,7 @@ export default class ModalSelector extends React.Component {
             if (item.section) {
                 return this.renderSection(item);
             }
-            return this.renderOption(item, index === this.props.data.length - 1);
+            return this.renderOption(item, index === this.props.data.length - 1, index === 0);
         });
 
         const closeOverlay = this.props.backdropPressToClose;
@@ -207,14 +212,14 @@ export default class ModalSelector extends React.Component {
             }}>
                 <View style={[styles.overlayStyle, this.props.overlayStyle]}>
                     <View style={[styles.optionContainer, this.props.optionContainerStyle]}>
-                        <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} accessible={this.props.accessible} accessibilityLabel={this.props.scrollViewAccessibilityLabel}>
+                        <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} accessible={this.props.scrollViewAccessible} accessibilityLabel={this.props.scrollViewAccessibilityLabel}>
                             <View style={{paddingHorizontal: 10}}>
                                 {options}
                             </View>
                         </ScrollView>
                     </View>
                     <View style={[styles.cancelContainer, this.props.cancelContainerStyle]}>
-                        <TouchableOpacity onPress={this.close} activeOpacity={this.props.touchableActiveOpacity} accessible={this.props.accessible} accessibilityLabel={this.props.cancelButtonAccessibilityLabel}>
+                        <TouchableOpacity onPress={this.close} activeOpacity={this.props.touchableActiveOpacity} accessible={this.props.cancelButtonAccessible} accessibilityLabel={this.props.cancelButtonAccessibilityLabel}>
                             <View style={[styles.cancelStyle, this.props.cancelStyle]}>
                                 <Text style={[styles.cancelTextStyle,this.props.cancelTextStyle]}>{this.props.cancelText}</Text>
                             </View>
