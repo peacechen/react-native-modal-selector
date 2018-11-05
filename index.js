@@ -52,7 +52,8 @@ const propTypes = {
     supportedOrientations:          Modal.propTypes.supportedOrientations,
     keyboardShouldPersistTaps:      PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     backdropPressToClose:           PropTypes.bool,
-    accessible:                     PropTypes.bool,
+    wrappedComponentAccessible:     PropTypes.bool,
+    listItemAccessible:             PropTypes.bool,
     cancelButtonAccessible:         PropTypes.bool,
     scrollViewAccessible:           PropTypes.bool,
     scrollViewAccessibilityLabel:   PropTypes.string,
@@ -94,7 +95,8 @@ const defaultProps = {
     supportedOrientations:          ['portrait', 'landscape'],
     keyboardShouldPersistTaps:      'always',
     backdropPressToClose:           false,
-    accessible:                     false,
+    wrappedComponentAccessible:     false,
+    listItemAccessible:             false,
     cancelButtonAccessible:         false,
     scrollViewAccessible:           false,
     scrollViewAccessibilityLabel:   undefined,
@@ -180,7 +182,7 @@ export default class ModalSelector extends React.Component {
               key={this.props.keyExtractor(option)}
               onPress={() => this.onChange(option)}
               activeOpacity={this.props.touchableActiveOpacity}
-              accessible={this.props.accessible}
+              accessible={this.props.listItemAccessible}
               accessibilityLabel={option.accessibilityLabel || undefined}
               importantForAccessibility={isFirstItem}
               {...this.props.passThruProps}
@@ -269,6 +271,7 @@ export default class ModalSelector extends React.Component {
                         style={this.props.touchableStyle}
                         onPress={this.open}
                         disabled={this.props.disabled}
+                        accessible={this.props.wrappedComponentAccessible}
                     >
                         <View style={this.props.childrenContainerStyle} pointerEvents="none">
                             {this.renderChildren()}
