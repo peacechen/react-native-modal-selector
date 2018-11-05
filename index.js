@@ -52,7 +52,7 @@ const propTypes = {
     supportedOrientations:          Modal.propTypes.supportedOrientations,
     keyboardShouldPersistTaps:      PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     backdropPressToClose:           PropTypes.bool,
-    wrappedComponentAccessible:     PropTypes.bool,
+    openButtonContainerAccessible:  PropTypes.bool,
     listItemAccessible:             PropTypes.bool,
     cancelButtonAccessible:         PropTypes.bool,
     scrollViewAccessible:           PropTypes.bool,
@@ -95,7 +95,7 @@ const defaultProps = {
     supportedOrientations:          ['portrait', 'landscape'],
     keyboardShouldPersistTaps:      'always',
     backdropPressToClose:           false,
-    wrappedComponentAccessible:     false,
+    openButtonContainerAccessible:     false,
     listItemAccessible:             false,
     cancelButtonAccessible:         false,
     scrollViewAccessible:           false,
@@ -271,7 +271,7 @@ export default class ModalSelector extends React.Component {
                         style={this.props.touchableStyle}
                         onPress={this.open}
                         disabled={this.props.disabled}
-                        accessible={this.props.wrappedComponentAccessible}
+                        accessible={this.props.openButtonContainerAccessible}
                     >
                         <View style={this.props.childrenContainerStyle} pointerEvents="none">
                             {this.renderChildren()}
