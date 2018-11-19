@@ -142,6 +142,8 @@ Prop                | Type     | Optional | Default      | Description
 `cancelContainerStyle`| object | Yes      | {}           | style definitions for the cancel container
 `backdropPressToClose`| bool   | Yes  | false        | `true` makes the modal close when the overlay is pressed
 `passThruProps`| object   | Yes  | {}        | props to pass through to the container View and each option TouchableOpacity (e.g. testID for testing)
+`selectTextPassThruProps`| object   | Yes  | {}        | props to pass through to the select text component
+`optionTextPassThruProps`| object   | Yes  | {}        | props to pass through to the options text components in the modal
 `openButtonContainerAccessible`| bool   | Yes  | false        | `true` enables accessibility for the open button container. Note: if `false` be sure to define accessibility props directly in the wrapped component.
 `listItemAccessible`| bool   | Yes  | false        | `true` enables accessibility for data items. Note: data items should have an `accessibilityLabel` property if this is enabled
 `cancelButtonAccessible`| bool   | Yes  | false        | `true` enables accessibility for cancel button.
