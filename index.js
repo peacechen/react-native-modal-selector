@@ -59,6 +59,8 @@ const propTypes = {
     scrollViewAccessibilityLabel:   PropTypes.string,
     cancelButtonAccessibilityLabel: PropTypes.string,
     passThruProps:                  PropTypes.object,
+    selectTextPassThruProps:        PropTypes.object,
+    optionTextPassThruProps:        PropTypes.object,
     modalOpenerHitSlop:             PropTypes.object,
     customSelector:                 PropTypes.node,
 };
@@ -102,6 +104,8 @@ const defaultProps = {
     scrollViewAccessibilityLabel:   undefined,
     cancelButtonAccessibilityLabel: undefined,
     passThruProps:                  {},
+    selectTextPassThruProps:        {},
+    optionTextPassThruProps:        {},
     modalOpenerHitSlop:             {top: 0, bottom: 0, left: 0, right: 0},
     customSelector:                 undefined,
 };
@@ -189,8 +193,7 @@ export default class ModalSelector extends React.Component {
             >
                 <View style={[styles.optionStyle, this.props.optionStyle, isLastItem &&
                 {borderBottomWidth: 0}]}>
-                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle,
-                                 isSelectedItem && this.props.selectedItemTextStyle]}>
+                    <Text style={[styles.optionTextStyle,this.props.optionTextStyle,isSelectedItem && this.props.selectedItemTextStyle]} {...this.props.optionTextPassThruProps}>
                         {optionLabel}
                     </Text>
                 </View>
@@ -238,7 +241,7 @@ export default class ModalSelector extends React.Component {
         }
         return (
             <View style={[styles.selectStyle, this.props.selectStyle]}>
-                <Text style={[styles.selectTextStyle, this.props.selectTextStyle]}>{this.state.selected}</Text>
+                <Text style={[styles.selectTextStyle, this.props.selectTextStyle]} {...this.props.selectTextPassThruProps}>{this.state.selected}</Text>
             </View>
         );
     }
