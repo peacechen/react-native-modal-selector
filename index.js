@@ -30,7 +30,7 @@ const propTypes = {
     visible:                        PropTypes.bool,
     closeOnChange:                  PropTypes.bool,
     initValue:                      PropTypes.string,
-    animationType:                  Modal.propTypes.animationType,
+    animationType:                  PropTypes.oneOf(['none', 'slide', 'fade']),
     style:                          ViewPropTypes.style,
     selectStyle:                    ViewPropTypes.style,
     selectTextStyle:                Text.propTypes.style,
@@ -49,7 +49,15 @@ const propTypes = {
     overlayStyle:                   ViewPropTypes.style,
     cancelText:                     PropTypes.string,
     disabled:                       PropTypes.bool,
-    supportedOrientations:          Modal.propTypes.supportedOrientations,
+    supportedOrientations:          PropTypes.arrayOf(
+                                      PropTypes.oneOf([
+                                        'portrait',
+                                        'portrait-upside-down',
+                                        'landscape',
+                                        'landscape-left',
+                                        'landscape-right',
+                                      ]),
+                                    ),
     keyboardShouldPersistTaps:      PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     backdropPressToClose:           PropTypes.bool,
     openButtonContainerAccessible:  PropTypes.bool,
@@ -141,7 +149,7 @@ export default class ModalSelector extends React.Component {
     }
 
     onChange = (item) => {
-        if (Platform.OS === 'android' || !Modal.propTypes.onDismiss) {
+        if (Platform.OS === 'android' || (Modal.propTypes && !Modal.propTypes.onDismiss)) { // don't know if this will work for previous version, please check!
             // RN >= 0.50 on iOS comes with the onDismiss prop for Modal which solves RN issue #10471
             this.props.onChange(item);
         }
