@@ -71,7 +71,7 @@ const propTypes = {
     optionTextPassThruProps:        PropTypes.object,
     modalOpenerHitSlop:             PropTypes.object,
     customSelector:                 PropTypes.node,
-    selectedIndex:                  PropTypes.number,
+    selectedKey:                    PropTypes.any,
 };
 
 const defaultProps = {
@@ -107,7 +107,7 @@ const defaultProps = {
     supportedOrientations:          ['portrait', 'landscape'],
     keyboardShouldPersistTaps:      'always',
     backdropPressToClose:           false,
-    openButtonContainerAccessible:     false,
+    openButtonContainerAccessible:  false,
     listItemAccessible:             false,
     cancelButtonAccessible:         false,
     scrollViewAccessible:           false,
@@ -118,14 +118,16 @@ const defaultProps = {
     optionTextPassThruProps:        {},
     modalOpenerHitSlop:             {top: 0, bottom: 0, left: 0, right: 0},
     customSelector:                 undefined,
-    selectedIndex:                  -1
+    selectedKey:                    ''
 };
 
 export default class ModalSelector extends React.Component {
 
     constructor(props) {
         super(props);
-        let selected = props.selectedIndex > -1 ? props.labelExtractor(props.data[props.selectedIndex]) : props.initValue;
+        let selected = props.initValue;
+        let selectedKey = props.data.filter((item) => props.keyExtractor(item) === props.selectedKey);
+        if(selectedKey.length > 0) selected = props.labelExtractor(selectedKey[0]);
         this.state = {
             modalVisible:  props.visible,
             selected:      selected,
