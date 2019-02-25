@@ -71,6 +71,7 @@ const propTypes = {
     optionTextPassThruProps:        PropTypes.object,
     modalOpenerHitSlop:             PropTypes.object,
     customSelector:                 PropTypes.node,
+    selectedIndex:                  PropTypes.number,
 };
 
 const defaultProps = {
@@ -117,16 +118,17 @@ const defaultProps = {
     optionTextPassThruProps:        {},
     modalOpenerHitSlop:             {top: 0, bottom: 0, left: 0, right: 0},
     customSelector:                 undefined,
+    selectedIndex:                  -1
 };
 
 export default class ModalSelector extends React.Component {
 
     constructor(props) {
         super(props);
-
+        let selected = props.selectedIndex > -1 ? props.labelExtractor(props.data[props.selectedIndex]) : props.initValue;
         this.state = {
             modalVisible:  props.visible,
-            selected:      props.initValue,
+            selected:      selected,
             cancelText:    props.cancelText,
             changedItem:   undefined,
         };
