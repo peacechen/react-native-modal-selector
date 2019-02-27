@@ -125,14 +125,12 @@ export default class ModalSelector extends React.Component {
 
     constructor(props) {
         super(props);
-        let selectedItem = props.data.filter((item) => props.keyExtractor(item) === props.selectedKey);
-        let selectedLabel = selectedItem.length > 0 ? props.labelExtractor(selectedItem[0]) : props.initValue;
-        let selectedKey = selectedItem.length > 0 ? props.selectedKey : undefined;
+        let selectedItem = this.validateSelectedKey(props.selectedKey);
         this.state = {
             modalVisible:  props.visible,
-            selected:      selectedLabel,
+            selected:      selectedItem.label,
             cancelText:    props.cancelText,
-            changedItem:   selectedKey,
+            changedItem:   selectedItem.key,
         };
     }
 
@@ -147,9 +145,22 @@ export default class ModalSelector extends React.Component {
             newState.modalVisible = this.props.visible;
             doUpdate = true;
         }
+        if(prevProps.selectedKey !== this.props.selectedKey){
+            let selectedItem = this.validateSelectedKey(this.props.selectedKey);
+            newState.selected = selectedItem.label;
+            newState.changedItem = selectedItem.key;
+            doUpdate = true;
+        }
         if (doUpdate) {
             this.setState(newState);
         }
+    }
+
+    validateSelectedKey = (key) => {
+        let selectedItem = this.props.data.filter((item) => this.props.keyExtractor(item) === key);
+        let selectedLabel = selectedItem.length > 0 ? this.props.labelExtractor(selectedItem[0]) : this.props.initValue;
+        let selectedKey = selectedItem.length > 0 ? key : undefined;
+        return {label: selectedLabel, key: selectedKey}
     }
 
     onChange = (item) => {
