@@ -131,12 +131,19 @@ export default class ModalSelector extends React.Component {
             selected:      selectedItem.label,
             cancelText:    props.cancelText,
             changedItem:   selectedItem.key,
+            disabled:      props.disabled,
         };
     }
 
     componentDidUpdate(prevProps, prevState) {
         let newState = {};
         let doUpdate = false;
+        if(prevProps.selectedKey !== this.props.selectedKey){
+            let selectedItem = this.validateSelectedKey(this.props.selectedKey);
+            newState.selected = selectedItem.label;
+            newState.changedItem = selectedItem.key;
+            doUpdate = true;
+        }
         if (prevProps.initValue !== this.props.initValue) {
             newState.selected = this.props.initValue;
             doUpdate = true;
@@ -145,10 +152,8 @@ export default class ModalSelector extends React.Component {
             newState.modalVisible = this.props.visible;
             doUpdate = true;
         }
-        if(prevProps.selectedKey !== this.props.selectedKey){
-            let selectedItem = this.validateSelectedKey(this.props.selectedKey);
-            newState.selected = selectedItem.label;
-            newState.changedItem = selectedItem.key;
+        if(prevProps.disabled !== this.props.disabled){
+            newState.disabled = this.props.disabled
             doUpdate = true;
         }
         if (doUpdate) {
@@ -306,7 +311,7 @@ export default class ModalSelector extends React.Component {
                         activeOpacity={this.props.touchableActiveOpacity}
                         style={this.props.touchableStyle}
                         onPress={this.open}
-                        disabled={this.props.disabled}
+                        disabled={this.state.disabled}
                         accessible={this.props.openButtonContainerAccessible}
                     >
                         <View style={this.props.childrenContainerStyle} pointerEvents="none">
