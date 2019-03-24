@@ -75,4 +75,10 @@ export default StyleSheet.create({
         textAlign: 'center',
         fontSize:  FONT_SIZE,
     },
+
+    initValueTextStyle: {
+        textAlign: 'center',
+        fontSize:  FONT_SIZE,
+        color:     '#d3d3d3',
+    },
 });
