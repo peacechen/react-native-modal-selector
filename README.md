@@ -151,6 +151,7 @@ Prop                | Type     | Optional | Default      | Description
 `optionContainerStyle`| object | Yes      | {}           | style definitions for the option container element
 `cancelStyle`       | object   | Yes      | {}           | style definitions for the cancel element
 `cancelTextStyle`   | object   | Yes      | {}           | style definitions for the cancel text element
+`initValueTextStyle`| object   | Yes      | {}           | style definitions for the initValue text element
 `cancelContainerStyle`| object | Yes      | {}           | style definitions for the cancel container
 `backdropPressToClose`| bool   | Yes  | false        | `true` makes the modal close when the overlay is pressed
 `passThruProps`| object   | Yes  | {}        | props to pass through to the container View and each option TouchableOpacity (e.g. testID for testing)
