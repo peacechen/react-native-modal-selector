@@ -277,7 +277,7 @@ export default class ModalSelector extends React.Component {
         let initSelectStyle = this.props.initValue === this.state.selected ?
             [styles.initValueTextStyle, this.props.initValueTextStyle] : [styles.selectTextStyle, this.props.selectTextStyle];
         return (
-            <View style={[styles,selectStyle, this.props.selectStyle]}>
+            <View style={[styles.selectStyle, this.props.selectStyle]}>
                 <Text style={initSelectStyle} {...this.props.selectTextPassThruProps}>{this.state.selected}</Text>
             </View>
         );
