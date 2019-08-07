@@ -244,12 +244,22 @@ export default class ModalSelector extends React.Component {
             return this.renderOption(item, index === this.props.data.length - 1, index === 0);
         });
 
-        const closeOverlay = this.props.backdropPressToClose;
+        let Overlay = View;
+        let overlayProps = {
+            style: {flex:1}
+        };
+        // Some RN versions have a bug here, so making the property opt-in works around this problem
+        if (this.props.backdropPressToClose) {
+          Overlay = TouchableWithoutFeedback;
+          overlayProps = {
+              key: `modalSelector${componentIndex++}`,
+              accessible: false,
+              onPress: this.close
+          };
+        }
 
         return (
-            <TouchableWithoutFeedback key={'modalSelector' + (componentIndex++)}  accessible={false} onPress={() => {
-                closeOverlay && this.close();
-            }}>
+            <Overlay {...overlayProps}>
                 <View style={[styles.overlayStyle, this.props.overlayStyle]}>
                     <View style={[styles.optionContainer, this.props.optionContainerStyle]}>
                         <ScrollView keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} accessible={this.props.scrollViewAccessible} accessibilityLabel={this.props.scrollViewAccessibilityLabel}>
@@ -266,7 +276,7 @@ export default class ModalSelector extends React.Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </TouchableWithoutFeedback>);
+            </Overlay>);
     }
 
     renderChildren = () => {
