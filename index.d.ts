@@ -2,7 +2,7 @@ import React from 'react';
 import { ViewStyle, TextStyle } from 'react-native';
 
 export interface IOption {
-  key: any;
+  key: React.Key;
   label?: string;
   section?: boolean;
   accessibilityLabel?: string;
@@ -18,84 +18,84 @@ interface IModalSelectorProps<TOption> {
    * Array of objects with a unique key and label to select in the modal
    * Optional component overrides label text
    *
-   * Default is []
+   * Default is `[]`
    */
   data: TOption[],
   
   /**
    * Callback function, when the users has selected an option
    *
-   * Default is () => {}
+   * Default is `() => {}`
    */
   onChange?: (option: TOption) => void; 
 
   /**
    * Callback function, when modal is opening
    *
-   * Default is () => {}
+   * Default is `() => {}`
    */
   onModalOpen?: () => void;
 
   /**
    * Callback function, when modal is closing
    *
-   * Default is () => {}
+   * Default is `() => {}`
    */
   onModalClose?: () => void;
 
   /**
    * Extract the key from the data item
    *
-   * Default is (data) => data.key 
+   * Default is `(data) => data.key` 
    */
-  keyExtractor?: (option: TOption) => any; 
+  keyExtractor?: (option: TOption) => React.Key; 
 
   /**
    * Extract the label from the data item
    *
-   * Default is (data) => data.label 
+   * Default is `(data) => data.label`
    */
   labelExtractor?: (option: TOption) => string; 
 
   /**
    * Extract the component from the data item
    *
-   * Default is (data) => data.component 
+   * Default is `(data) => data.component` 
    */
   componentExtractor?: (option: TOption) => React.ReactNode; 
 
   /**
    * Control open/close state of modal
    *
-   * Default is false
+   * Default is `false`
    */
   visible?: boolean;
 
   /**
    * Control if modal closes on select
    *
-   * Default is true
+   * Default is `true`
    */
   closeOnChange?: boolean;
 
   /**
    * Text that is initially shown on the button
    *
-   * Default is 'Select me!'
+   * Default is `'Select me!'`
    */
   initValue?: string;
 
   /**
    * Text of the cancel button
    *
-   * Default is 'cancel'
+   * Default is `'cancel'`
    */
   cancelText?: string;
 
   /**
    * Type of animation to be used to show the modal.
    *
-   * Default is 'slide'
+   * Default is `'slide'`
    */
   animationType?: AnimationType;
 
@@ -108,98 +108,98 @@ interface IModalSelectorProps<TOption> {
    * Style definitions for the select element (available in default mode only!)
    * NOTE: Due to breaking changes in React Native, RN < 0.39.0 should pass flex:1 explicitly to selectStyle as a prop
    * 
-   * Default is {}
+   * Default is `{}`
    */
   selectStyle?: ViewStyle;
 
   /**
    * Style definitions for the select element (available in default mode only!)
    * 
-   * Default is {}
+   * Default is `{}`
    */
   selectTextStyle?: ViewStyle;
 
   /**
    * Style definitions for the option element
    * 
-   * Default is {}
+   * Default is `{}`
    */
   optionStyle?: ViewStyle;
 
   /**
    * Style definitions for the option text element
    * 
-   * Default is {}
+   * Default is `{}`
    */
   optionTextStyle?: TextStyle;
 
   /**
    * Style definitions for the option container element
    * 
-   * Default is {}
+   * Default is `{}`
    */
   optionContainerStyle?: ViewStyle;
 
   /**
    * Style definitions for the section element
    * 
-   * Default is {}
+   * Default is `{}`
    */
   sectionStyle?: ViewStyle;
 
   /**
    * Style definitions for the children container view
    * 
-   * Default is {}
+   * Default is `{}`
    */
   childrenContainerStyle?: ViewStyle;
 
   /**
    * Style definitions for the touchable element
    * 
-   * Default is {}
+   * Default is `{}`
    */
   touchableStyle?: ViewStyle;
 
   /**
    * Opacity for the touchable element on touch
    * 
-   * Default is 0.2
+   * Default is `0.2`
    */
   touchableActiveOpacity?: number;
 
   /**
    * Style definitions for the select text element
    * 
-   * Default is {}
+   * Default is `{}`
    */
   sectionTextStyle?: TextStyle;
 
   /**
    * Style definitions for the currently selected text element
    * 
-   * Default is {}
+   * Default is `{}`
    */
   selectedItemTextStyle?: TextStyle;
 
   /**
    * Style definitions for the cancel container
    * 
-   * Default is {}
+   * Default is `{}`
    */
   cancelContainerStyle?: ViewStyle;
 
   /**
    * Style definitions for the cancel element
    * 
-   * Default is {}
+   * Default is `{}`
    */
   cancelStyle?: ViewStyle;
 
   /**
    * Style definitions for the cancel text element
    * 
-   * Default is {}
+   * Default is `{}`
    */
   cancelTextStyle?: TextStyle;
 
@@ -207,42 +207,42 @@ interface IModalSelectorProps<TOption> {
    * Style definitions for the overlay background element
    * RN <= 0.41 should override this with pixel value for padding
    * 
-   * Default is { flex: 1, padding: '5%', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.7)' }
+   * Default is `{ flex: 1, padding: '5%', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.7)' }`
    */
   overlayStyle?: ViewStyle;
 
   /**
    * Style definitions for the initValue text element
    * 
-   * Default is {}
+   * Default is `{}`
    */
   initValueTextStyle?: TextStyle;
 
   /**
    * Disables opening of the modal
    * 
-   * Default is false
+   * Default is `false`
    */
   disabled?: boolean;
 
   /**
    * Orientations the modal supports
    * 
-   * Default is ['portrait', 'landscape']
+   * Default is `['portrait', 'landscape']`
    */
   supportedOrientations?: OrientationType[];
 
   /**
    * Passed to underlying ScrollView
    * 
-   * Default is 'always'
+   * Default is `'always'`
    */
   keyboardShouldPersistTaps?: string | boolean;
 
   /**
    * true makes the modal close when the overlay is pressed
    * 
-   * Default is false
+   * Default is `false`
    */
   backdropPressToClose?: boolean;
 
@@ -250,7 +250,7 @@ interface IModalSelectorProps<TOption> {
    * true enables accessibility for the open button container
    * Note: if false be sure to define accessibility props directly in the wrapped component
    * 
-   * Default is false
+   * Default is `false`
    */
   openButtonContainerAccessible?: boolean;
 
@@ -258,14 +258,14 @@ interface IModalSelectorProps<TOption> {
    * true enables accessibility for data items. 
    * Note: data items should have an accessibilityLabel property if this is enabled
    * 
-   * Default is false
+   * Default is `false`
    */
   listItemAccessible?: boolean;
 
   /**
    * true enables accessibility for cancel button.
    * 
-   * Default is false
+   * Default is `false`
    */
   cancelButtonAccessible?: boolean;
 
@@ -273,7 +273,7 @@ interface IModalSelectorProps<TOption> {
    * true enables accessibility for the scroll view. 
    * Only enable this if you don't want to interact with individual data items.
    * 
-   * Default is false
+   * Default is `false`
    */
   scrollViewAccessible?: boolean;
 
@@ -290,28 +290,28 @@ interface IModalSelectorProps<TOption> {
   /**
    * props to pass through to the container View and each option TouchableOpacity (e.g. testID for testing)
    * 
-   * Default is {}
+   * Default is `{}`
    */
   passThruProps?: object;
 
   /**
    * props to pass through to the select text component
    * 
-   * Default is {}
+   * Default is `{}`
    */
   selectTextPassThruProps?: object;
 
   /**
    * props to pass through to the options text components in the modal
    * 
-   * Default is {}
+   * Default is `{}`
    */
   optionTextPassThruProps?: object;
 
   /**
    * How far touch can stray away from touchable that opens modal
    * 
-   * Default is {}
+   * Default is `{}`
    */
   modalOpenerHitSlop?: object;
 
@@ -323,9 +323,9 @@ interface IModalSelectorProps<TOption> {
   /**
    * Key of the item to be initially selected
    * 
-   * Default is ''
+   * Default is `''`
    */
-  selectedKey?: any;
+  selectedKey?: React.Key;
 }
 
 export default class ModalSelector<TOption = IOption> extends React.Component<IModalSelectorProps<TOption>, any> {}
