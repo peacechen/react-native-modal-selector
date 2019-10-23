@@ -3,7 +3,7 @@ import { ViewStyle, TextStyle } from 'react-native';
 
 export interface IOption {
   key: any;
-  label: string;
+  label?: string;
   section?: boolean;
   accessibilityLabel?: string;
   component?: React.ReactNode;
