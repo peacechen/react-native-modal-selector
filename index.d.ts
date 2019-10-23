@@ -55,7 +55,7 @@ interface IModalSelectorProps<TOption> {
    *
    * Default is (data) => data.label 
    */
-  labelExtractor?: (option: TOption) => any; 
+  labelExtractor?: (option: TOption) => string; 
 
   /**
    * Extract the component from the data item
