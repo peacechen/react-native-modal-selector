@@ -20,7 +20,7 @@ interface IModalSelectorProps<TOption> {
    *
    * Default is []
    */
-  data: TOption [],
+  data: TOption[],
   
   /**
    * Callback function, when the users has selected an option
