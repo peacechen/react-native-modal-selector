@@ -2,7 +2,8 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-
+import { CheckBox } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
 import {
     View,
     Modal,
@@ -45,12 +46,12 @@ const propTypes = {
     touchableActiveOpacity: PropTypes.number,
     sectionTextStyle:       Text.propTypes.style,
     selectedItemTextStyle:  Text.propTypes.style,
-    cancelContainerStyle:   ViewPropTypes.style,
-    cancelStyle:            ViewPropTypes.style,
-    cancelTextStyle:        Text.propTypes.style,
+    finishContainerStyle:   ViewPropTypes.style,
+    finishStyle:            ViewPropTypes.style,
+    finishTextStyle:        Text.propTypes.style,
     overlayStyle:           ViewPropTypes.style,
     initValueTextStyle:     Text.propTypes.style,
-    cancelText:             PropTypes.string,
+    finishText:             PropTypes.string,
     disabled:               PropTypes.bool,
     supportedOrientations:  PropTypes.arrayOf(
         PropTypes.oneOf([
@@ -68,16 +69,17 @@ const propTypes = {
     backdropPressToClose:           PropTypes.bool,
     openButtonContainerAccessible:  PropTypes.bool,
     listItemAccessible:             PropTypes.bool,
-    cancelButtonAccessible:         PropTypes.bool,
+    finishButtonAccessible:         PropTypes.bool,
     scrollViewAccessible:           PropTypes.bool,
     scrollViewAccessibilityLabel:   PropTypes.string,
-    cancelButtonAccessibilityLabel: PropTypes.string,
+    finishButtonAccessibilityLabel: PropTypes.string,
     passThruProps:                  PropTypes.object,
     selectTextPassThruProps:        PropTypes.object,
     optionTextPassThruProps:        PropTypes.object,
     modalOpenerHitSlop:             PropTypes.object,
     customSelector:                 PropTypes.node,
-    selectedKey:                    PropTypes.any,
+    initSelectedKeys:               PropTypes.arrayOf(PropTypes.any),
+    multiple:                       PropTypes.bool,
 };
 
 const defaultProps = {
@@ -104,39 +106,43 @@ const defaultProps = {
     touchableActiveOpacity:         0.2,
     sectionTextStyle:               {},
     selectedItemTextStyle:          {},
-    cancelContainerStyle:           {},
-    cancelStyle:                    {},
-    cancelTextStyle:                {},
+    finishContainerStyle:           {},
+    finishStyle:                    {},
+    finishTextStyle:                {},
     overlayStyle:                   {},
     initValueTextStyle:             {},
-    cancelText:                     "cancel",
+    finishText:                     "Done",
     disabled:                       false,
     supportedOrientations:          ["portrait", "landscape"],
     keyboardShouldPersistTaps:      "always",
     backdropPressToClose:           false,
     openButtonContainerAccessible:  false,
     listItemAccessible:             false,
-    cancelButtonAccessible:         false,
+    finishButtonAccessible:         false,
     scrollViewAccessible:           false,
     scrollViewAccessibilityLabel:   undefined,
-    cancelButtonAccessibilityLabel: undefined,
+    finishButtonAccessibilityLabel: undefined,
     passThruProps:                  {},
     selectTextPassThruProps:        {},
     optionTextPassThruProps:        {},
     modalOpenerHitSlop:             { top: 0, bottom: 0, left: 0, right: 0 },
     customSelector:                 undefined,
-    selectedKey:                    "",
+    initSelectedKeys:               [],
+    multiple:                       false,
 };
+
+Icon.loadFont();
 
 export default class ModalSelector extends React.Component {
     constructor(props) {
         super(props);
-        let selectedItem = this.validateSelectedKey(props.selectedKey);
+        let validatedKeys = props.initSelectedKeys.reduce((acc, val) => {
+            const { key } = this.validateSelectedKey(val);
+            key && acc.push(key);
+        }, []);
         this.state = {
             modalVisible: props.visible,
-            selected:     selectedItem.label,
-            cancelText:   props.cancelText,
-            changedItem:  selectedItem.key,
+            selected:     props.multiple ? validatedKeys : [validatedKeys[0]],
         };
     }
 
@@ -151,10 +157,15 @@ export default class ModalSelector extends React.Component {
             newState.modalVisible = this.props.visible;
             doUpdate = true;
         }
-        if (prevProps.selectedKey !== this.props.selectedKey) {
-            let selectedItem = this.validateSelectedKey(this.props.selectedKey);
-            newState.selected = selectedItem.label;
-            newState.changedItem = selectedItem.key;
+        if (
+            JSON.stringify(prevProps.initSelectedKeys) !==
+      JSON.stringify(this.props.initSelectedKeys)
+        ) {
+            let validatedKeys = this.props.initSelectedKeys.reduce((acc, val) => {
+                const { key } = this.validateSelectedKey(val);
+                key && acc.push(key);
+            }, []);
+            newState.selected = validatedKeys;
             doUpdate = true;
         }
         if (doUpdate) {
@@ -174,25 +185,30 @@ export default class ModalSelector extends React.Component {
       return { label: selectedLabel, key: selectedKey };
   };
 
-  onChange = item => {
+  onChange = (item, checked = false) => {
+      let { selected } = this.state;
+      const itemKey = this.props.keyExtractor(item);
+      if (this.props.multiple)
+          checked
+              ? selected.push(itemKey)
+              : selected.indexOf(itemKey) >= 0 &&
+          delete selected[selected.indexOf(itemKey)];
+      else selected = [itemKey];
       if (
           Platform.OS === "android" ||
       (Modal.propTypes !== undefined && !Modal.propTypes.onDismiss)
       ) {
       // don't know if this will work for previous version, please check!
       // RN >= 0.50 on iOS comes with the onDismiss prop for Modal which solves RN issue #10471
-          this.props.onChange(item);
+          this.props.onChange(selected.map(this.validateSelectedKey));
       }
-      this.setState(
-          { selected: this.props.labelExtractor(item), changedItem: item },
-          () => {
-              if (this.props.closeOnChange) this.close();
-          }
-      );
+      this.setState({ selected }, () => {
+          if (this.props.closeOnChange && !this.props.multiple) this.close();
+      });
   };
 
-  getSelectedItem() {
-      return this.state.changedItem;
+  getSelectedItems() {
+      return this.state.selected.map(this.validateSelectedKey);
   }
 
   close = () => {
@@ -206,12 +222,12 @@ export default class ModalSelector extends React.Component {
       this.props.onModalOpen();
       this.setState({
           modalVisible: true,
-          changedItem:  undefined,
       });
   };
 
   renderSection = section => {
       const optionComponent = this.props.componentExtractor(section);
+
       let component = optionComponent || (
           <Text style={[styles.sectionTextStyle, this.props.sectionTextStyle]}>
               {this.props.labelExtractor(section)}
@@ -230,26 +246,34 @@ export default class ModalSelector extends React.Component {
 
   renderOption = (option, isLastItem, isFirstItem) => {
       const optionComponent = this.props.componentExtractor(option);
+      const isSelectedItem =
+      this.state.selected.indexOf(this.props.keyExtractor(option)) >= 0;
       const optionLabel = this.props.labelExtractor(option);
-      const isSelectedItem = optionLabel === this.state.selected;
-
       let component = optionComponent || (
-          <Text
-              style={[
-                  styles.optionTextStyle,
-                  this.props.optionTextStyle,
-                  isSelectedItem && this.props.selectedItemTextStyle,
-              ]}
-              {...this.props.optionTextPassThruProps}
-          >
-              {optionLabel}
-          </Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+              {this.props.multiple && (
+                  <CheckBox
+                      checked={isSelectedItem}
+                      onPress={() => this.onChange(option, !isSelectedItem)}
+                  />
+              )}
+              <Text
+                  style={[
+                      styles.optionTextStyle,
+                      this.props.optionTextStyle,
+                      isSelectedItem && this.props.selectedItemTextStyle,
+                  ]}
+                  {...this.props.optionTextPassThruProps}
+              >
+                  {optionLabel}
+              </Text>
+          </View>
       );
 
       return (
           <TouchableOpacity
               key={this.props.keyExtractor(option)}
-              onPress={() => this.onChange(option)}
+              onPress={() => this.onChange(option, !isSelectedItem)}
               activeOpacity={this.props.touchableActiveOpacity}
               accessible={this.props.listItemAccessible}
               accessibilityLabel={option.accessibilityLabel || undefined}
@@ -310,19 +334,19 @@ export default class ModalSelector extends React.Component {
                       </ScrollView>
                   </View>
                   <View
-                      style={[styles.cancelContainer, this.props.cancelContainerStyle]}
+                      style={[styles.finishContainer, this.props.finishContainerStyle]}
                   >
                       <TouchableOpacity
                           onPress={this.close}
                           activeOpacity={this.props.touchableActiveOpacity}
-                          accessible={this.props.cancelButtonAccessible}
-                          accessibilityLabel={this.props.cancelButtonAccessibilityLabel}
+                          accessible={this.props.finishButtonAccessible}
+                          accessibilityLabel={this.props.finishButtonAccessibilityLabel}
                       >
-                          <View style={[styles.cancelStyle, this.props.cancelStyle]}>
+                          <View style={[styles.finishStyle, this.props.finishStyle]}>
                               <Text
-                                  style={[styles.cancelTextStyle, this.props.cancelTextStyle]}
+                                  style={[styles.finishTextStyle, this.props.finishTextStyle]}
                               >
-                                  {this.props.cancelText}
+                                  {this.props.finishText}
                               </Text>
                           </View>
                       </TouchableOpacity>
@@ -343,7 +367,11 @@ export default class ModalSelector extends React.Component {
       return (
           <View style={[styles.selectStyle, this.props.selectStyle]}>
               <Text style={initSelectStyle} {...this.props.selectTextPassThruProps}>
-                  {this.state.selected}
+                  {this.state.selected
+                      .map(key =>
+                          this.props.labelExtractor(this.validateSelectedKey(key))
+                      )
+                      .join()}
               </Text>
           </View>
       );
@@ -358,8 +386,14 @@ export default class ModalSelector extends React.Component {
               visible={this.state.modalVisible}
               onRequestClose={this.close}
               animationType={this.props.animationType}
+              multiple={this.props.multiple}
               onDismiss={() =>
-                  this.state.changedItem && this.props.onChange(this.state.changedItem)
+                  this.state.selected &&
+          this.props.onChange(
+              this.props.multiple
+                  ? this.state.selected.map(this.validateSelectedKey)
+                  : this.validateSelectedKey(this.state.selected[0])
+          )
               }
           >
               {this.renderOptionList()}

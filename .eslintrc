@@ -54,7 +54,7 @@
     no-console: 1,
     no-unused-vars: 1,
     jsx-quotes: ["error", "prefer-double"],
-    no-unused-expressions: 2,
+    no-unused-expressions: "off",
     require-await: 2,
     no-irregular-whitespace: 2,
     arrow-spacing: "error",

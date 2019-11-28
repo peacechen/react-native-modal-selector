@@ -9,7 +9,6 @@ import ModalSelector from 'react-native-modal-selector';
 class SampleApp extends Component {
   constructor() {
     super();
-
     this.state = {
       textInputValue: '',
     };
@@ -53,9 +52,10 @@ class SampleApp extends Component {
         {/* Default mode: a clickable button will re rendered */}
         <ModalSelector
           data={data}
+          multiple={true}
           initValue="Select something yummy!"
           onChange={option => {
-            alert(`${option.label} (${option.key}) nom nom nom`);
+            alert(`${JSON.stringify(option)} nom nom nom`);
           }}
         />
 

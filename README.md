@@ -179,8 +179,9 @@ Prop                | Type     | Optional | Default      | Description
 `cancelButtonAccessibilityLabel` | string   | Yes      | undefined | Accessibility label for the cancel button
 `modalOpenerHitSlop` | object | Yes | {} | How far touch can stray away from touchable that opens modal ([RN docs](https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#hitslop))
 `customSelector`     | node   | Yes | undefined          | Render a custom node instead of the built-in select box.
-`selectedKey`     | any   | Yes | ''          | Key of the item to be initially selected
+`initSelectedKeys`     | array<any>   | Yes | []          | Key of the items to be initially selected. Should contain only one key if `multiple` is selected as false.
+`multiple`  | bool  | No |  false   | Adds the ability to select multiple options.
 
 ### Methods
 
-`getSelectedItem()`: get current selected item, updated by onChange event.
+`getSelectedItems()`: get current selected items, updated by onChange event.
