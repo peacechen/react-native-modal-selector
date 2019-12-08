@@ -3,8 +3,13 @@
 import React, {Component} from 'react';
 
 import {View, Text, TextInput, Switch} from 'react-native';
+import {CheckBox} from 'react-native-elements';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import ModalSelector from 'react-native-modal-selector';
+
+Icon.loadFont();
 
 class SampleApp extends Component {
   constructor() {
@@ -53,6 +58,9 @@ class SampleApp extends Component {
         <ModalSelector
           data={data}
           multiple={true}
+          renderCheckbox={(checked, onPress) => (
+            <CheckBox onPress={onPress} checked={checked} />
+          )}
           initValue="Select something yummy!"
           onChange={option => {
             alert(`${JSON.stringify(option)} nom nom nom`);

@@ -14,7 +14,7 @@ Use [nodemon](https://github.com/remy/nodemon) to keep the module in sync with `
 
 ```
 $ npm install
-$ react-native run-[ios|android]
+$ npx react-native run-[ios|android]
 $ npm run nodemon
 ```
 

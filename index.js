@@ -2,8 +2,6 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { CheckBox } from "react-native-elements";
-import Icon from "react-native-vector-icons/FontAwesome";
 import {
     View,
     Modal,
@@ -80,6 +78,7 @@ const propTypes = {
     customSelector:                 PropTypes.node,
     initSelectedKeys:               PropTypes.arrayOf(PropTypes.any),
     multiple:                       PropTypes.bool,
+    renderCheckbox:                 PropTypes.func,
 };
 
 const defaultProps = {
@@ -129,9 +128,8 @@ const defaultProps = {
     customSelector:                 undefined,
     initSelectedKeys:               [],
     multiple:                       false,
+    renderCheckbox:                 undefined,
 };
-
-Icon.loadFont();
 
 export default class ModalSelector extends React.Component {
     constructor(props) {
@@ -251,12 +249,10 @@ export default class ModalSelector extends React.Component {
       const optionLabel = this.props.labelExtractor(option);
       let component = optionComponent || (
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-              {this.props.multiple && (
-                  <CheckBox
-                      checked={isSelectedItem}
-                      onPress={() => this.onChange(option, !isSelectedItem)}
-                  />
-              )}
+              {this.props.multiple &&
+          this.props.renderCheckbox(isSelectedItem, () =>
+              this.onChange(option, !isSelectedItem)
+          )}
               <Text
                   style={[
                       styles.optionTextStyle,

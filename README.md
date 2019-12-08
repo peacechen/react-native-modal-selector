@@ -181,6 +181,7 @@ Prop                | Type     | Optional | Default      | Description
 `customSelector`     | node   | Yes | undefined          | Render a custom node instead of the built-in select box.
 `initSelectedKeys`     | array<any>   | Yes | []          | Key of the items to be initially selected. Should contain only one key if `multiple` is selected as false.
 `multiple`  | bool  | No |  false   | Adds the ability to select multiple options.
+`renderCheckbox`  | function  | No |  (checked, onPress) => {}   | Function that returns a checkbox element. Arguments of the function include `checked` state and `onPress` function that gets executed when the element is pressed.
 
 ### Methods
 
