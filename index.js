@@ -148,7 +148,7 @@ export default class ModalSelector extends React.Component {
         let newState = {};
         let doUpdate = false;
         if (prevProps.initValue !== this.props.initValue) {
-            newState.selected = this.props.initValue;
+            newState.selected = [this.props.initValue];
             doUpdate = true;
         }
         if (prevProps.visible !== this.props.visible) {
@@ -356,8 +356,7 @@ export default class ModalSelector extends React.Component {
       if (this.props.children) {
           return this.props.children;
       }
-      let initSelectStyle =
-      this.props.initValue === this.state.selected
+      let initSelectStyle = this.state.selected.find(this.state.initValue)
           ? [styles.initValueTextStyle, this.props.initValueTextStyle]
           : [styles.selectTextStyle, this.props.selectTextStyle];
       return (
