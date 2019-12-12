@@ -124,7 +124,7 @@ Prop                | Type     | Optional | Default      | Description
 `data`              | array    | No       | []           | array of objects with a unique `key` and `label` to select in the modal. Optional `component` overrides label text.
 `onChange`          | function | Yes      | () => {}     | callback function, when the users has selected an option
 `onModalOpen`       | function | Yes      | () => {}     | callback function, when modal is opening
-`onModalClose`      | function | Yes      | () => {}     | callback function, when modal is closing
+`onModalClose`      | function | Yes      | (item) => {} | callback function, when modal is closing. Returns the selected item.
 `keyExtractor`      | function | Yes      | (data) => data.key   | extract the key from the data item
 `labelExtractor`    | function | Yes      | (data) => data.label | extract the label from the data item
 `componentExtractor`| function | Yes      | (data) => data.component | extract the component from the data item
