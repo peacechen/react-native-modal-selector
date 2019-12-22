@@ -186,11 +186,11 @@ export default class ModalSelector extends React.Component {
   onChange = (item, checked = false) => {
       let { selected } = this.state;
       const itemKey = this.props.keyExtractor(item);
+      const selectedIndex = selected.indexOf(itemKey);
       if (this.props.multiple) {
           checked
               ? selected.push(itemKey)
-              : selected.indexOf(itemKey) >= 0 &&
-          delete selected[selected.indexOf(itemKey)];
+              : selectedIndex >= 0 && selected.splice(selectedIndex, 1);
       } else {
           selected = [itemKey];
       }
