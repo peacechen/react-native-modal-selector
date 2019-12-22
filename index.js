@@ -137,6 +137,7 @@ export default class ModalSelector extends React.Component {
         let validatedKeys = props.initSelectedKeys.reduce((acc, val) => {
             const { key } = this.validateSelectedKey(val);
             key && acc.push(key);
+            return acc;
         }, []);
         this.state = {
             modalVisible: props.visible,
@@ -180,7 +181,9 @@ export default class ModalSelector extends React.Component {
           ? this.props.labelExtractor(selectedItem[0])
           : this.props.initValue;
       let selectedKey = selectedItem.length > 0 ? key : undefined;
-      return { label: selectedLabel, key: selectedKey };
+
+      // Return the item as it is without removing any extra keys that user passes.
+      return { ...selectedItem[0], label: selectedLabel, key: selectedKey };
   };
 
   onChange = (item, checked = false) => {
