@@ -156,17 +156,6 @@ export default class ModalSelector extends React.Component {
             newState.modalVisible = this.props.visible;
             doUpdate = true;
         }
-        if (
-            JSON.stringify(prevProps.initSelectedKeys) !==
-      JSON.stringify(this.props.initSelectedKeys)
-        ) {
-            let validatedKeys = this.props.initSelectedKeys.reduce((acc, val) => {
-                const { key } = this.validateSelectedKey(val);
-                key && acc.push(key);
-            }, []);
-            newState.selected = validatedKeys;
-            doUpdate = true;
-        }
         if (doUpdate) {
             this.setState(newState);
         }
@@ -181,7 +170,6 @@ export default class ModalSelector extends React.Component {
           ? this.props.labelExtractor(selectedItem[0])
           : this.props.initValue;
       let selectedKey = selectedItem.length > 0 ? key : undefined;
-
       // Return the item as it is without removing any extra keys that user passes.
       return { ...selectedItem[0], label: selectedLabel, key: selectedKey };
   };
