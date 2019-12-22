@@ -27,6 +27,12 @@ If you have an urgent problem, hire a mentor for a 1:1 live session on Git-Start
 Help others in paid 1:1 live sessions to get started.
 [![Give paid 1:1 live support.](https://git-start.com/assets/git-start-mentor-banner-medium.svg?sanitize=true)](https://git-start.com/help-request/overview/peacechen%2Freact-native-modal-selector)
 
+## Breaking changes
+
+Version 2.0.0 onwards support multi-select feature. As such, following properties from the versions before have changed.
+
+1) `selectedKey` is now `initSelectedKeys`. It accepts an array of keys.
+2) `getSelectedItem` is now `getSelectedItems`. It returns an array of selected items.
 
 ## Usage
 
@@ -181,7 +187,7 @@ Prop                | Type     | Optional | Default      | Description
 `customSelector`     | node   | Yes | undefined          | Render a custom node instead of the built-in select box.
 `initSelectedKeys`     | array<any>   | Yes | []          | Key of the items to be initially selected. Should contain only one key if `multiple` is selected as false.
 `multiple`  | bool  | No |  false   | Adds the ability to select multiple options.
-`renderCheckbox`  | function  | No |  (checked, onPress) => {}   | Function that returns a checkbox element. Arguments of the function include `checked` state and `onPress` function that gets executed when the element is pressed.
+`renderCheckbox`  | function  | Yes |  (checked, onPress) => {}   | Function that returns a checkbox element. Arguments of the function include `checked` state and `onPress` function that gets executed when the element is pressed. Required only if multiple option is selected.
 
 ### Methods
 

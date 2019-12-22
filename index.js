@@ -128,7 +128,7 @@ const defaultProps = {
     customSelector:                 undefined,
     initSelectedKeys:               [],
     multiple:                       false,
-    renderCheckbox:                 undefined,
+    renderCheckbox:                 () => {},
 };
 
 export default class ModalSelector extends React.Component {
@@ -186,12 +186,14 @@ export default class ModalSelector extends React.Component {
   onChange = (item, checked = false) => {
       let { selected } = this.state;
       const itemKey = this.props.keyExtractor(item);
-      if (this.props.multiple)
+      if (this.props.multiple) {
           checked
               ? selected.push(itemKey)
               : selected.indexOf(itemKey) >= 0 &&
           delete selected[selected.indexOf(itemKey)];
-      else selected = [itemKey];
+      } else {
+          selected = [itemKey];
+      }
       if (
           Platform.OS === "android" ||
       (Modal.propTypes !== undefined && !Modal.propTypes.onDismiss)
