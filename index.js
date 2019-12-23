@@ -382,7 +382,7 @@ export default class ModalSelector extends React.Component {
           this.props.onChange(
               this.props.multiple
                   ? this.state.selected.map(this.validateSelectedKey)
-                  : this.validateSelectedKey(this.state.selected[0])
+                  : [this.validateSelectedKey(this.state.selected[0])]
           )
               }
           >
