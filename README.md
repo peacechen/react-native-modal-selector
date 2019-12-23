@@ -27,6 +27,12 @@ If you have an urgent problem, hire a mentor for a 1:1 live session on Git-Start
 Help others in paid 1:1 live sessions to get started.
 [![Give paid 1:1 live support.](https://git-start.com/assets/git-start-mentor-banner-medium.svg?sanitize=true)](https://git-start.com/help-request/overview/peacechen%2Freact-native-modal-selector)
 
+## Breaking changes
+
+Version 2.0.0 onwards support multi-select feature. As such, following properties from the versions before have changed.
+
+1) `selectedKey` is now `initSelectedKeys`. It accepts an array of keys.
+2) `getSelectedItem` is now `getSelectedItems`. It returns an array of selected items.
 
 ## Usage
 
@@ -136,7 +142,7 @@ return (
 Prop                | Type     | Optional | Default      | Description
 ------------------- | -------- | -------- | ------------ | -----------
 `data`              | array    | No       | []           | array of objects with a unique `key` and `label` to select in the modal. Optional `component` overrides label text.
-`onChange`          | function | Yes      | () => {}     | callback function, when the users has selected an option
+`onChange`          | function | Yes      | () => {}     | callback function, when the users has selected an option. Returns an array of selected item/items.
 `onModalOpen`       | function | Yes      | () => {}     | callback function, when modal is opening
 `onModalClose`      | function | Yes      | (item) => {} | callback function, when modal is closing. Returns the selected item.
 `keyExtractor`      | function | Yes      | (data) => data.key   | extract the key from the data item
@@ -179,8 +185,10 @@ Prop                | Type     | Optional | Default      | Description
 `cancelButtonAccessibilityLabel` | string   | Yes      | undefined | Accessibility label for the cancel button
 `modalOpenerHitSlop` | object | Yes | {} | How far touch can stray away from touchable that opens modal ([RN docs](https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#hitslop))
 `customSelector`     | node   | Yes | undefined          | Render a custom node instead of the built-in select box.
-`selectedKey`     | any   | Yes | ''          | Key of the item to be initially selected
+`initSelectedKeys`     | array<any>   | Yes | []          | Key of the items to be initially selected. Should contain only one key if `multiple` is selected as false.
+`multiple`  | bool  | No |  false   | Adds the ability to select multiple options.
+`renderCheckbox`  | function  | Yes |  (checked, onPress) => {}   | Function that returns a checkbox element. Arguments of the function include `checked` state and `onPress` function that gets executed when the element is pressed. Required only if multiple option is selected.
 
 ### Methods
 
-`getSelectedItem()`: get current selected item, updated by onChange event.
+`getSelectedItems()`: get current selected items, updated by onChange event.
