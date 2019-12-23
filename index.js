@@ -182,9 +182,8 @@ export default class ModalSelector extends React.Component {
           checked
               ? selected.push(itemKey)
               : selectedIndex >= 0 && selected.splice(selectedIndex, 1);
-          selected = selected.map(this.validateSelectedKey);
       } else {
-          selected = itemKey;
+          selected = [itemKey];
       }
       if (
           Platform.OS === "android" ||
@@ -192,7 +191,7 @@ export default class ModalSelector extends React.Component {
       ) {
       // don't know if this will work for previous version, please check!
       // RN >= 0.50 on iOS comes with the onDismiss prop for Modal which solves RN issue #10471
-          this.props.onChange(selected);
+          this.props.onChange(selected.map(this.validateSelectedKey));
       }
       this.setState({ selected }, () => {
           if (this.props.closeOnChange && !this.props.multiple) this.close();
