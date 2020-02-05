@@ -117,7 +117,7 @@ interface IModalSelectorProps<TOption> {
    * 
    * Default is `{}`
    */
-  selectTextStyle?: ViewStyle;
+  selectTextStyle?: TextStyle;
 
   /**
    * Style definitions for the option element
