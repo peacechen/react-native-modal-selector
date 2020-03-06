@@ -170,10 +170,12 @@ export default class ModalSelector extends React.Component {
     }
 
     onChange = (item) => {
+        this.props.onChange(item);
+        /* this doesn't seem to play nice, the setState below doesn't propagate to the onDismiss state (changeItem) is undefined in the onDismiss function
         if (Platform.OS === 'android' || (Modal.propTypes !== undefined && !Modal.propTypes.onDismiss)) { // don't know if this will work for previous version, please check!
             // RN >= 0.50 on iOS comes with the onDismiss prop for Modal which solves RN issue #10471
             this.props.onChange(item);
-        }
+        }*/
         this.setState({ selected: this.props.labelExtractor(item), changedItem: item }, () => {
           if (this.props.closeOnChange)
             this.close(item);
@@ -303,6 +305,8 @@ export default class ModalSelector extends React.Component {
         );
     }
 
+
+
     render() {
 
         const dp = (
@@ -313,7 +317,9 @@ export default class ModalSelector extends React.Component {
                 visible={this.state.modalVisible}
                 onRequestClose={this.close}
                 animationType={this.props.animationType}
-                onDismiss={() => this.state.changedItem && this.props.onChange(this.state.changedItem)}
+                onDismiss={() => {
+                    return this.state.changedItem && this.props.onChange(this.state.changedItem)
+                }}
             >
                 {this.renderOptionList()}
             </Modal>
