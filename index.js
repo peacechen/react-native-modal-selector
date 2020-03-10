@@ -170,10 +170,7 @@ export default class ModalSelector extends React.Component {
     }
 
     onChange = (item) => {
-        if (Platform.OS === 'android' || (Modal.propTypes !== undefined && !Modal.propTypes.onDismiss)) { // don't know if this will work for previous version, please check!
-            // RN >= 0.50 on iOS comes with the onDismiss prop for Modal which solves RN issue #10471
-            this.props.onChange(item);
-        }
+        this.props.onChange(item);
         this.setState({ selected: this.props.labelExtractor(item), changedItem: item }, () => {
           if (this.props.closeOnChange)
             this.close(item);
