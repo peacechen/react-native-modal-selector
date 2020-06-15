@@ -111,7 +111,8 @@ Optionally provide a `component` key which overrides the default label text:
 [{
   key: 5,
   label: 'Red Apples',
-  component: <View style={{backgroundColor: 'red'}}><Text style={{color: 'white'}}>Red Apples custom component ☺</Text></View>
+  component: <View style={{backgroundColor: 'red'}}><Text style={{color: 'white'}}>Red Apples custom component ☺</Text></View>,
+  testID: '5-red-apples'
 }]
 ```
 
@@ -183,6 +184,7 @@ Prop                | Type     | Optional | Default      | Description
 `selectedKey`        | any    | Yes | ''                 | Key of the item to be initially selected
 `enableShortPress`          | bool   | Yes | true               | enables short press. This is regular touch behavior.
 `enableLongPress`           | bool   | Yes | false              | enables long press. When true, `onModalOpen` returns `{longPress: true}`
+`testIDPrefix`           | string   | Yes | `defaultTestID`              | text to prefix option testID if no testID key provided in objects from props.data array. Resulting for each option testID: 'defaultTestID-<optionLabel>'
 
 ### Methods
 
