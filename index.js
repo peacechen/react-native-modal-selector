@@ -75,7 +75,7 @@ const propTypes = {
     selectedKey:                    PropTypes.any,
     enableShortPress:               PropTypes.bool,
     enableLongPress:                PropTypes.bool,
-    testIDPrefix:                   PropTypes.string,
+    optionsTestIDPrefix:            PropTypes.string,
 };
 
 const defaultProps = {
@@ -127,7 +127,7 @@ const defaultProps = {
     selectedKey:                    '',
     enableShortPress:               true,
     enableLongPress:                false,
-    testIDPrefix:                   'defaultTestID',
+    optionsTestIDPrefix:            'default',
 };
 
 export default class ModalSelector extends React.Component {
@@ -232,7 +232,7 @@ export default class ModalSelector extends React.Component {
         return (
             <TouchableOpacity
               key={this.props.keyExtractor(option)}
-              testID={option.testID || this.props.testIDPrefix + '-' + optionLabel}
+              testID={option.testID || this.props.optionsTestIDPrefix + '-' + optionLabel}
               onPress={() => this.onChange(option)}
               activeOpacity={this.props.touchableActiveOpacity}
               accessible={this.props.listItemAccessible}
