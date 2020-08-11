@@ -69,6 +69,7 @@ const propTypes = {
     passThruProps:                  PropTypes.object,
     selectTextPassThruProps:        PropTypes.object,
     optionTextPassThruProps:        PropTypes.object,
+    cancelTextPassThruProps:        PropTypes.object,
     scrollViewPassThruProps:        PropTypes.object,
     modalOpenerHitSlop:             PropTypes.object,
     customSelector:                 PropTypes.node,
@@ -121,6 +122,7 @@ const defaultProps = {
     passThruProps:                  {},
     selectTextPassThruProps:        {},
     optionTextPassThruProps:        {},
+    cancelTextPassThruProps:        {},
     scrollViewPassThruProps:        {},
     modalOpenerHitSlop:             {top: 0, bottom: 0, left: 0, right: 0},
     customSelector:                 undefined,
@@ -309,7 +311,7 @@ export default class ModalSelector extends React.Component {
                     <View style={[styles.cancelContainer, cancelContainerStyle]}>
                         <TouchableOpacity onPress={this.close} activeOpacity={touchableActiveOpacity} accessible={cancelButtonAccessible} accessibilityLabel={cancelButtonAccessibilityLabel}>
                             <View style={[styles.cancelStyle, cancelStyle]}>
-                                <Text style={[styles.cancelTextStyle,cancelTextStyle]}>{cancelText}</Text>
+                                <Text style={[styles.cancelTextStyle,cancelTextStyle]} {...this.props.cancelTextPassThruProps}>{cancelText}</Text>
                             </View>
                         </TouchableOpacity>
                     </View>

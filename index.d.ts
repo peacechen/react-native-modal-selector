@@ -309,6 +309,13 @@ interface IModalSelectorProps<TOption> {
   optionTextPassThruProps?: object;
 
   /**
+   * props to pass through to the cancel text components in the modal
+   *
+   * Default is `{}`
+   */
+  cancelTextPassThruProps?: object;
+
+  /**
    * props to pass through to the internal ScrollView
    *
    * Default is `{}`
