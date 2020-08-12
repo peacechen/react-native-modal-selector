@@ -208,7 +208,7 @@ export default class ModalSelector extends React.Component {
     renderSection = (section) => {
         const optionComponent = this.props.componentExtractor(section);
         let component = optionComponent || (
-          <Text style={[styles.sectionTextStyle,this.props.sectionTextStyle]}>{this.props.labelExtractor(section)}</Text>
+          <Text allowFontScaling={false} style={[styles.sectionTextStyle,this.props.sectionTextStyle]}>{this.props.labelExtractor(section)}</Text>
         );
 
         return (
@@ -224,7 +224,7 @@ export default class ModalSelector extends React.Component {
         const isSelectedItem = optionLabel === this.state.selected;
 
         let component = optionComponent || (
-          <Text style={[styles.optionTextStyle,this.props.optionTextStyle,isSelectedItem && this.props.selectedItemTextStyle]} {...this.props.optionTextPassThruProps}>
+          <Text allowFontScaling={false} style={[styles.optionTextStyle,this.props.optionTextStyle,isSelectedItem && this.props.selectedItemTextStyle]} {...this.props.optionTextPassThruProps}>
               {optionLabel}
           </Text>
         );
@@ -309,7 +309,7 @@ export default class ModalSelector extends React.Component {
                     <View style={[styles.cancelContainer, cancelContainerStyle]}>
                         <TouchableOpacity onPress={this.close} activeOpacity={touchableActiveOpacity} accessible={cancelButtonAccessible} accessibilityLabel={cancelButtonAccessibilityLabel}>
                             <View style={[styles.cancelStyle, cancelStyle]}>
-                                <Text style={[styles.cancelTextStyle,cancelTextStyle]}>{cancelText}</Text>
+                                <Text allowFontScaling={false} style={[styles.cancelTextStyle,cancelTextStyle]}>{cancelText}</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -326,7 +326,7 @@ export default class ModalSelector extends React.Component {
             [styles.initValueTextStyle, this.props.initValueTextStyle] : [styles.selectTextStyle, this.props.selectTextStyle];
         return (
             <View style={[styles.selectStyle, this.props.selectStyle]}>
-                <Text style={initSelectStyle} {...this.props.selectTextPassThruProps}>{this.state.selected}</Text>
+                <Text allowFontScaling={false} style={initSelectStyle} {...this.props.selectTextPassThruProps}>{this.state.selected}</Text>
             </View>
         );
     }
