@@ -7,6 +7,7 @@ import {
     View,
     Modal,
     Text,
+    FlatList,
     ScrollView,
     TouchableOpacity,
     TouchableWithoutFeedback,
@@ -29,6 +30,7 @@ const propTypes = {
     visible:                        PropTypes.bool,
     closeOnChange:                  PropTypes.bool,
     initValue:                      PropTypes.string,
+    listType:                       PropTypes.oneOf(['SCROLLVIEW', 'FLATLIST']),
     animationType:                  PropTypes.oneOf(['none', 'slide', 'fade']),
     style:                          ViewPropTypes.style,
     selectStyle:                    ViewPropTypes.style,
@@ -87,6 +89,7 @@ const defaultProps = {
     keyExtractor:                   (item) => item.key,
     labelExtractor:                 (item) => item.label,
     componentExtractor:             (item) => item.component,
+    listType:                       'SCROLLVIEW',
     visible:                        false,
     closeOnChange:                  true,
     initValue:                      'Select me!',
@@ -251,6 +254,7 @@ export default class ModalSelector extends React.Component {
     renderOptionList = () => {
         const {
             data,
+            listType,
             backdropPressToClose,
             scrollViewPassThruProps,
             overlayStyle,
@@ -266,6 +270,8 @@ export default class ModalSelector extends React.Component {
             cancelTextStyle,
             cancelText,
         } = this.props;
+
+        const TotalData = data.length;
 
         let options = data.map((item, index) => {
             if (item.section) {
@@ -297,6 +303,16 @@ export default class ModalSelector extends React.Component {
             <Overlay {...overlayProps}>
                 <View style={[styles.overlayStyle, overlayStyle]}>
                     <View style={[styles.optionContainer, optionContainerStyle]}>
+                    {listType === 'FLATLIST'?  
+                        <FlatList
+                            data={data}
+                            keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+                            accessible={scrollViewAccessible}
+                            accessibilityLabel={scrollViewAccessibilityLabel}
+                            keyExtractor={this.props.keyExtractor}
+                            renderItem={(props) => props.item.section ? this.renderSection(props.item) : this.renderOption(props.item, props.index === 0, props.index === (TotalData - 1))}
+                        />
+                        :
                         <ScrollView
                             keyboardShouldPersistTaps={keyboardShouldPersistTaps}
                             accessible={scrollViewAccessible}
@@ -306,7 +322,7 @@ export default class ModalSelector extends React.Component {
                             <View style={optionsContainerStyle}>
                                 {options}
                             </View>
-                        </ScrollView>
+                        </ScrollView>}
                     </View>
                     <View style={[styles.cancelContainer, cancelContainerStyle]}>
                         <TouchableOpacity onPress={this.close} activeOpacity={touchableActiveOpacity} accessible={cancelButtonAccessible} accessibilityLabel={cancelButtonAccessibilityLabel}>
