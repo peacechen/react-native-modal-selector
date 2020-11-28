@@ -6,7 +6,8 @@ import {
     View,
     Text,
     TextInput,
-    Switch
+    Switch,
+    Image
 } from 'react-native';
 
 import ModalSelector from 'react-native-modal-selector'
