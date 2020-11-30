@@ -310,7 +310,7 @@ export default class ModalSelector extends React.Component {
                             accessible={scrollViewAccessible}
                             accessibilityLabel={scrollViewAccessibilityLabel}
                             keyExtractor={this.props.keyExtractor}
-                            renderItem={(props) => props.item.section ? this.renderSection(props.item) : this.renderOption(props.item, props.index === 0, props.index === (TotalData - 1))}
+                            renderItem={(props) => props.item.section ? this.renderSection(props.item) : this.renderOption(props.item, props.index === (TotalData - 1), props.index === 0)}
                         />
                         :
                         <ScrollView
