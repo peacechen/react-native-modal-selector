@@ -6,10 +6,12 @@ import {
     View,
     Text,
     TextInput,
-    Switch
+    Switch,
+    Image
 } from 'react-native';
 
 import ModalSelector from 'react-native-modal-selector'
+import { countryList } from "./assets/CountryList";
 
 class SampleApp extends Component {
 
@@ -87,9 +89,50 @@ class SampleApp extends Component {
                         />
                     }
                 />
+
+            { /* Default mode: a clickable button will re rendered with FlatList */}
+            <ModalSelector
+              data={countryList}
+              listType="FLATLIST"
+              keyExtractor={(x) => x.name}
+              labelExtractor={(x) => x.name}
+              initValue="listType with FlatList"
+              initValueTextStyle={{color: "black"}}
+              selectStyle={{borderColor: "black"}}
+              selectTextStyle={{color: "blue"}}
+              onChange={option => { this.setState({ textInputValue: option.name }) }}
+              componentExtractor={(option) => <ListItem data={option} />}
+            />
+
+            { /* Default mode: a clickable button will re rendered without FlatList */}
+            <ModalSelector
+              data={countryList}
+              keyExtractor={(x) => x.name}
+              labelExtractor={(x) => x.name}
+              initValue="listType without FlatList"
+              initValueTextStyle={{color: "black"}}
+              selectStyle={{borderColor: "black"}}
+              selectTextStyle={{color: "blue"}}
+              onChange={option => { this.setState({ textInputValue: option.name }) }}
+              componentExtractor={(option) => <ListItem data={option} />}/>
+                 
             </View>
         );
     }
 }
+
+const ListItem = ({ data }) => {
+  return (
+    <View key={data.number} style={{ flexDirection: "row" }}>
+      <Image
+        style={{ width: 26, height: 26, borderRadius: 13 }}
+        resizeMode="cover"
+        source={{ uri: data.flag }}
+      />
+      <Text> {data.number}</Text>
+      <Text> {data.name}</Text>
+    </View>
+  );
+};
 
 export default SampleApp;

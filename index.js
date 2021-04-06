@@ -7,6 +7,7 @@ import {
     View,
     Modal,
     Text,
+    FlatList,
     ScrollView,
     TouchableOpacity,
     TouchableWithoutFeedback,
@@ -29,6 +30,7 @@ const propTypes = {
     visible:                        PropTypes.bool,
     closeOnChange:                  PropTypes.bool,
     initValue:                      PropTypes.string,
+    listType:                       PropTypes.oneOf(['SCROLLVIEW', 'FLATLIST']),
     animationType:                  PropTypes.oneOf(['none', 'slide', 'fade']),
     style:                          ViewPropTypes.style,
     selectStyle:                    ViewPropTypes.style,
@@ -87,6 +89,7 @@ const defaultProps = {
     keyExtractor:                   (item) => item.key,
     labelExtractor:                 (item) => item.label,
     componentExtractor:             (item) => item.component,
+    listType:                       'SCROLLVIEW',
     visible:                        false,
     closeOnChange:                  true,
     initValue:                      'Select me!',
@@ -248,9 +251,18 @@ export default class ModalSelector extends React.Component {
             </TouchableOpacity>);
     }
 
+    renderFlatlistOption = ({ item, index, separators }) => {
+        if (item.section) {
+            return this.renderSection(item);
+        }
+        const numItems = this.props.data.length;
+        this.renderOption(item, index === (numItems - 1), index === 0);
+    }
+
     renderOptionList = () => {
         const {
             data,
+            listType,
             backdropPressToClose,
             scrollViewPassThruProps,
             overlayStyle,
@@ -276,7 +288,7 @@ export default class ModalSelector extends React.Component {
 
         let Overlay = View;
         let overlayProps = {
-            style: {flex:1}
+            style: {flex: 1},
         };
         // Some RN versions have a bug here, so making the property opt-in works around this problem
         if (backdropPressToClose) {
@@ -284,7 +296,7 @@ export default class ModalSelector extends React.Component {
           overlayProps = {
               key: `modalSelector${componentIndex++}`,
               accessible: false,
-              onPress: this.close
+              onPress: this.close,
           };
         }
 
@@ -297,16 +309,27 @@ export default class ModalSelector extends React.Component {
             <Overlay {...overlayProps}>
                 <View style={[styles.overlayStyle, overlayStyle]}>
                     <View style={[styles.optionContainer, optionContainerStyle]}>
-                        <ScrollView
-                            keyboardShouldPersistTaps={keyboardShouldPersistTaps}
-                            accessible={scrollViewAccessible}
-                            accessibilityLabel={scrollViewAccessibilityLabel}
-                            {...scrollViewPassThruProps}
-                        >
-                            <View style={optionsContainerStyle}>
-                                {options}
-                            </View>
-                        </ScrollView>
+                        {listType === 'FLATLIST'?
+                            <FlatList
+                                data={data}
+                                keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+                                accessible={scrollViewAccessible}
+                                accessibilityLabel={scrollViewAccessibilityLabel}
+                                keyExtractor={this.props.keyExtractor}
+                                renderItem={this.renderFlatlistOption}
+                            />
+                            :
+                            <ScrollView
+                                keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+                                accessible={scrollViewAccessible}
+                                accessibilityLabel={scrollViewAccessibilityLabel}
+                                {...scrollViewPassThruProps}
+                            >
+                                <View style={optionsContainerStyle}>
+                                    {options}
+                                </View>
+                            </ScrollView>
+                        }
                     </View>
                     <View style={[styles.cancelContainer, cancelContainerStyle]}>
                         <TouchableOpacity onPress={this.close} activeOpacity={touchableActiveOpacity} accessible={cancelButtonAccessible} accessibilityLabel={cancelButtonAccessibilityLabel}>
@@ -316,7 +339,8 @@ export default class ModalSelector extends React.Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-            </Overlay>);
+            </Overlay>
+        );
     }
 
     renderChildren = () => {

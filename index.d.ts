@@ -1,5 +1,5 @@
 import React from 'react';
-import { ViewStyle, TextStyle } from 'react-native';
+import { ViewStyle, TextStyle, FlatListProps } from 'react-native';
 
 export interface IOption {
   key: React.Key;
@@ -12,6 +12,7 @@ export interface IOption {
 
 type AnimationType = 'none' | 'slide' | 'fade';
 type OrientationType = 'portrait' | 'portrait-upside-down' | 'landscape' | 'landscape-left' | 'landscape-right';
+type ListType = 'SCROLLVIEW' | 'FLATLIST';
 
 interface IModalSelectorProps<TOption> {
   /**
@@ -21,6 +22,13 @@ interface IModalSelectorProps<TOption> {
    * Default is `[]`
    */
   data: TOption[],
+
+      /**
+   * List to be render inside modal can be Scrollview or Flatlist
+   * 
+   * Default is `'SCROLLVIEW'`
+   */
+  listType?: ListType; 
   
   /**
    * Callback function, when the users has selected an option
@@ -342,4 +350,4 @@ interface IModalSelectorProps<TOption> {
   selectedKey?: React.Key;
 }
 
-export default class ModalSelector<TOption = IOption> extends React.Component<IModalSelectorProps<TOption>, any> {}
+export default class ModalSelector<TOption = IOption> extends React.Component<IModalSelectorProps<TOption> & FlatListProps<any>, any> {}
