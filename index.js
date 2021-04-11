@@ -256,7 +256,7 @@ export default class ModalSelector extends React.Component {
             return this.renderSection(item);
         }
         const numItems = this.props.data.length;
-        this.renderOption(item, index === (numItems - 1), index === 0);
+        return this.renderOption(item, index === (numItems - 1), index === 0);
     }
 
     renderOptionList = () => {

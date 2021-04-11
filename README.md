@@ -151,6 +151,7 @@ Prop                | Type     | Optional | Default      | Description
 `disabled`          | bool     | Yes      | false        | `true` disables opening of the modal
 `supportedOrientations`    | ['portrait', 'landscape'] | Yes      | both      | orientations the modal supports
 `keyboardShouldPersistTaps`| `string` / `bool`         | Yes      | `always`  | passed to underlying ScrollView
+`listType`          | string   | Yes      | `SCROLLVIEW` | scroller type: `SCROLLVIEW` or `FLATLIST`
 `animationType`     | string   | Yes      | `slide`      | type of animation to be used to show the modal. Must be one of `none`, `slide` or `fade`.
 `style`             | object   | Yes      |              | style definitions for the root element
 `childrenContainerStyle`| object   | Yes      | {}           | style definitions for the children container view
