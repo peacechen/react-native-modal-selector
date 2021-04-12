@@ -348,6 +348,11 @@ interface IModalSelectorProps<TOption> {
    * Default is `''`
    */
   selectedKey?: React.Key;
+
+  enableShortPress?: boolean;
+
+  enableLongPress?: boolean;
+ 
 }
 
-export default class ModalSelector<TOption = IOption> extends React.Component<IModalSelectorProps<TOption> & FlatListProps<any>, any> {}
+export default class ModalSelector<TOption = IOption> extends React.Component<IModalSelectorProps<TOption>> {open: (args0?:{longPress?:boolean,[args1:string]: any})=>void}
