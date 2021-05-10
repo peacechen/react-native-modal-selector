@@ -11,12 +11,9 @@ import {
     ScrollView,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    ViewPropTypes as RNViewPropTypes,
 } from 'react-native';
 
 import styles from './style';
-
-const ViewPropTypes = RNViewPropTypes || View.propTypes;
 
 let componentIndex = 0;
 
@@ -32,23 +29,23 @@ const propTypes = {
     initValue:                      PropTypes.string,
     listType:                       PropTypes.oneOf(['SCROLLVIEW', 'FLATLIST']),
     animationType:                  PropTypes.oneOf(['none', 'slide', 'fade']),
-    style:                          ViewPropTypes.style,
-    selectStyle:                    ViewPropTypes.style,
-    selectTextStyle:                Text.propTypes.style,
-    optionStyle:                    ViewPropTypes.style,
-    optionTextStyle:                Text.propTypes.style,
-    optionContainerStyle:           ViewPropTypes.style,
-    sectionStyle:                   ViewPropTypes.style,
-    childrenContainerStyle:         ViewPropTypes.style,
-    touchableStyle:                 ViewPropTypes.style,
+    style:                          PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    selectStyle:                    PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    selectTextStyle:                PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    optionStyle:                    PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    optionTextStyle:                PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    optionContainerStyle:           PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    sectionStyle:                   PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    childrenContainerStyle:         PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    touchableStyle:                 PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
     touchableActiveOpacity:         PropTypes.number,
-    sectionTextStyle:               Text.propTypes.style,
-    selectedItemTextStyle:          Text.propTypes.style,
-    cancelContainerStyle:           ViewPropTypes.style,
-    cancelStyle:                    ViewPropTypes.style,
-    cancelTextStyle:                Text.propTypes.style,
-    overlayStyle:                   ViewPropTypes.style,
-    initValueTextStyle:             Text.propTypes.style,
+    sectionTextStyle:               PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    selectedItemTextStyle:          PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    cancelContainerStyle:           PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    cancelStyle:                    PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    cancelTextStyle:                PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    overlayStyle:                   PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+    initValueTextStyle:             PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
     cancelText:                     PropTypes.string,
     disabled:                       PropTypes.bool,
     supportedOrientations:          PropTypes.arrayOf(
