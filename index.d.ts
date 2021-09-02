@@ -15,6 +15,8 @@ type AnimationType = 'none' | 'slide' | 'fade';
 type OrientationType = 'portrait' | 'portrait-upside-down' | 'landscape' | 'landscape-left' | 'landscape-right';
 type ListType = 'SCROLLVIEW' | 'FLATLIST';
 
+export type ModalSelectorProps = IModalSelectorProps<IOption>;
+
 interface IModalSelectorProps<TOption> {
   /**
    * Array of objects with a unique key and label to select in the modal
@@ -50,7 +52,7 @@ interface IModalSelectorProps<TOption> {
    *
    * Default is `() => {}`
    */
-  onModalClose?: () => void;
+  onModalClose?: (option: TOption) => void;
 
   /**
    * Extract the key from the data item
@@ -368,9 +370,9 @@ interface IModalSelectorProps<TOption> {
  
 }
 
- 
+type FlatListCustom<T> = Omit<FlatListProps<T>, "renderItem">
 
-export default class ModalSelector<TOption = IOption> extends React.Component<IModalSelectorProps<TOption>>  {
+export default class ModalSelector<TOption = IOption> extends React.Component<IModalSelectorProps<TOption> & FlatListCustom<any>, any> {
   open: (args0?: {longPress?: boolean, [args1:string]: any})=> void;
   getSelectedItem: () => TOption;
 }
