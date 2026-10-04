@@ -311,8 +311,9 @@ export default class ModalSelector extends React.Component {
           optionsContainerStyle.flexDirection = 'row';
         }
 
+        const {key: overlayKey, ...restOverlayProps} = overlayProps;
         return (
-            <Overlay {...overlayProps}>
+            <Overlay key={overlayKey} {...restOverlayProps}>
                 <View style={[styles.overlayStyle, overlayStyle]}>
                     <View style={[styles.optionContainer, optionContainerStyle]}>
                         {header}
