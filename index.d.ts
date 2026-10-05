@@ -379,6 +379,6 @@ type FlatListCustom<T> = Omit<FlatListProps<T>, "renderItem">
 
 export default class ModalSelector<TOption = IOption> extends React.Component<IModalSelectorProps<TOption> & FlatListCustom<any>, any> {
   open: (args0?: {longPress?: boolean, [args1:string]: any})=> void;
-  close: (item: TOption) => void;
+  close: (item?: TOption) => void;
   getSelectedItem: () => TOption;
 }
