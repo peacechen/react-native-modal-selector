@@ -302,7 +302,7 @@ export default class ModalSelector extends React.Component {
           overlayProps = {
               key: `modalSelector${componentIndex++}`,
               accessible: false,
-              onPress: this.close,
+              onPress: () => this.close(),
           };
         }
 
@@ -341,7 +341,7 @@ export default class ModalSelector extends React.Component {
                         }
                     </View>
                     <View style={[styles.cancelContainer, cancelContainerStyle]}>
-                        <TouchableOpacity onPress={this.close} activeOpacity={touchableActiveOpacity} accessible={cancelButtonAccessible} accessibilityLabel={cancelButtonAccessibilityLabel}>
+                        <TouchableOpacity onPress={() => this.close()} activeOpacity={touchableActiveOpacity} accessible={cancelButtonAccessible} accessibilityLabel={cancelButtonAccessibilityLabel}>
                             <View style={[styles.cancelStyle, cancelStyle]}>
                                 <Text style={[styles.cancelTextStyle,cancelTextStyle]} {...this.props.cancelTextPassThruProps}>{cancelText}</Text>
                             </View>
@@ -374,7 +374,7 @@ export default class ModalSelector extends React.Component {
                 ref={element => this.model = element}
                 supportedOrientations={this.props.supportedOrientations}
                 visible={this.state.modalVisible}
-                onRequestClose={this.close}
+                onRequestClose={() => this.close()}
                 animationType={this.props.animationType}
                 onDismiss={() => this.state.changedItem && this.props.onChange(this.state.changedItem)}
             >

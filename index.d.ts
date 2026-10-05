@@ -48,11 +48,11 @@ interface IModalSelectorProps<TOption> {
   onModalOpen?: () => void;
 
   /**
-   * Callback function, when modal is closing
+   * Callback function, when modal is closing. The option is undefined when cancelled.
    *
    * Default is `() => {}`
    */
-  onModalClose?: (option: TOption) => void;
+  onModalClose?: (option?: TOption) => void;
 
   /**
    * Extract the key from the data item
@@ -379,6 +379,6 @@ type FlatListCustom<T> = Omit<FlatListProps<T>, "renderItem">
 
 export default class ModalSelector<TOption = IOption> extends React.Component<IModalSelectorProps<TOption> & FlatListCustom<any>, any> {
   open: (args0?: {longPress?: boolean, [args1:string]: any})=> void;
-  close: (item: TOption) => void;
+  close: (item?: TOption) => void;
   getSelectedItem: () => TOption;
 }
